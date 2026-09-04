@@ -1,0 +1,10 @@
+# Hand-written Noctalia config. GUI-managed overrides live in
+# ~/.local/state/noctalia/settings.toml and take precedence over this file.
+
+# Blurred/tinted wallpaper copy on its own layer. niri places it inside the
+# overview backdrop via the ^noctalia-backdrop layer-rule in
+# ~/.config/niri/config.kdl
+[backdrop]
+enabled        = true
+blur_intensity = 0.5
+tint_intensity = 0.3

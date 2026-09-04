@@ -1,0 +1,29 @@
+// Niri configuration for CachyOS
+// For documentation and full reference, see: https://github.com/YaLTeR/niri/wiki
+
+// ────────────── Input Configuration ──────────────
+// https://github.com/YaLTeR/niri/wiki/Configuration:-Input
+
+input {
+    keyboard {
+        xkb {
+            layout "us" // Use the German keyboard layout
+        }
+        numlock // Enable numlock on startup
+    }
+
+    touchpad {
+        tap // Enable tap-to-click
+        natural-scroll // Enable natural (macOS-style) scrolling
+    }
+
+    focus-follows-mouse // Automatically focus windows under the mouse pointer
+    warp-mouse-to-focus // Moves mouse to window that is focused
+    workspace-auto-back-and-forth // Enable workspace back & forth switching
+}
+
+gestures {
+    hot-corners {
+        off
+    }
+}

@@ -1,0 +1,20 @@
+// niri config — split into sections/ so each concern lives in one small file.
+// Every file below is watched: edit one and niri live-reloads. No restart.
+//
+// ORDER MATTERS. window-rule / output / workspace entries stack in include
+// order, and later values override earlier ones.
+
+include "sections/input.kdl"
+include "sections/outputs.kdl"
+include "sections/binds.kdl"
+include "sections/startup.kdl"
+include "sections/layout.kdl"
+include "sections/animations.kdl"
+include "sections/window-rules.kdl"
+include "sections/environment.kdl"
+include "sections/workspaces.kdl"
+include "sections/misc.kdl"
+
+// Noctalia writes this file itself (theme colors).
+// It MUST stay last so its layout colors override sections/layout.kdl.
+include "noctalia.kdl"

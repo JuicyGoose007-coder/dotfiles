@@ -1,0 +1,26 @@
+[mgr]
+show_hidden = true
+
+# Narrow parent pane, wide preview - closer to superfile's proportions.
+ratio = [1, 3, 4]
+
+# Superfile shows size in its panel footer; yazi puts it on each row.
+linemode = "size"
+
+# MOD+Y runs `kitty -e yazi` with no shell, so EDITOR is unset there. Yazi's
+# default edit opener is `${EDITOR:-vi}` and vi is not installed, so opening
+# a file did nothing. Name the editor outright, like superfile's editor key.
+[opener]
+edit = [
+	{ run = 'nvim %s', desc = "nvim", for = "unix", block = true },
+]
+
+[[plugin.prepend_fetchers]]
+url   = "*"
+run   = "git"
+group = "git"
+
+[[plugin.prepend_fetchers]]
+url   = "*/"
+run   = "git"
+group = "git"

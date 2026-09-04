@@ -1,0 +1,8 @@
+// ────────────── Startup Applications ──────────────
+// https://github.com/YaLTeR/niri/wiki/Configuration:-Miscellaneous#spawn-sh-at-startup
+
+// Noctalia provides the bar, notifications, wallpaper, polkit agent and lock screen.
+spawn-at-startup "noctalia"
+spawn-at-startup "vesktop"
+// spawn-sh-at-startup "sleep 1 && steam -no-browser"
+spawn-sh-at-startup "niri msg action focus-workspace Main && kitty"

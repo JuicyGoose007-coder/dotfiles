@@ -1,0 +1,10 @@
+brave-bin
+claude-code
+herdr-bin
+neovim-git
+noctalia-greeter-git
+paru
+vesktop
+vial-keychron-git
+yay-bin
+zen-browser-bin

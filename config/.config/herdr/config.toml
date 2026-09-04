@@ -1,0 +1,65 @@
+onboarding = false
+[theme]
+name = "terminal"
+auto_switch = false
+
+[theme.custom]
+accent = "#ebdbb2"
+panel_bg = "reset"
+sidebar_bg = "reset"
+active_row_bg = "#474240"
+selection_bg = "#514c49"
+surface0 = "#474240"
+surface1 = "#514c49"
+surface_dim = "#1e1e1e"
+overlay0 = "#76706c"
+overlay1 = "#ebdbb2"
+text = "#fbf1c7"
+subtext0 = "#ebdbb2"
+mauve = "#b16286"
+green = "#98971a"
+yellow = "#d79921"
+red = "#cc241d"
+blue = "#458588"
+teal = "#689d6a"
+peach = "#cc7b1d"
+
+[ui]
+show_agent_labels_on_pane_borders = true
+
+status_indicators = "symbols"
+[ui.toast]
+delivery = "system"
+
+[keys]
+# Split bindings, stated explicitly so the effect is unambiguous.
+# Herdr's config names use vertical/horizontal, but its APIs use right/down;
+# these are the stock keys, annotated with what they actually do.
+split_vertical   = "prefix+v"      # new pane to the RIGHT (side-by-side columns)
+split_horizontal = "prefix+minus"  # new pane BELOW (stacked rows)
+
+# Agent navigation. Cycles focus through every detected agent pane,
+# across workspaces, in sidebar order — not just panes in this tab.
+next_agent       = "prefix+a"
+previous_agent   = "prefix+shift+a"
+
+# Pane navigation, tmux/vim style. Direct chords, no prefix — these are
+# captured by Herdr before the pane sees them, so ctrl+l no longer reaches
+# the shell as clear-screen.
+focus_pane_left  = "ctrl+h"
+focus_pane_down  = "ctrl+j"
+focus_pane_up    = "ctrl+k"
+focus_pane_right = "ctrl+l"
+
+# Space (workspace) navigation. Prefix chords, so nothing leaks into the
+# pane the way alt+j/k did (terminals send those as ESC-prefixed sequences).
+# j/k follow the sidebar's vertical order, matching the ctrl+j/k pane chords.
+# prefix+j/k are free because focus_pane_down/up were moved off them above.
+previous_workspace = "prefix+k"
+next_workspace     = "prefix+j"
+
+# Kitty graphics passthrough. Off by default, so yazi image previews worked
+# in a plain kitty window (MOD+Y) but not inside a herdr pane. Marked
+# experimental upstream; revert by deleting this section.
+[experimental]
+kitty_graphics = true

@@ -1,0 +1,18 @@
+    prefer-no-csd // Disable program decorations
+    //screenshot-path null // Disable screenshot saving
+    screenshot-path "~/Pictures/screenshots/Screenshot from %Y-%m-%d %H-%M-%S.png"
+    hotkey-overlay {
+        skip-at-startup
+    }
+    blur {
+        passes 4
+        offset 0.75
+    }
+cursor {
+    xcursor-theme "Adwaita"
+    xcursor-size 24
+}
+// Lets Noctalia notification actions focus/activate windows
+debug {
+    honor-xdg-activation-with-invalid-serial
+}

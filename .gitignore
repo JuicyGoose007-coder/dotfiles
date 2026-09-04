@@ -1,0 +1,23 @@
+# Secrets — never commit these
+.zshrc_secrets
+.zshrc.local
+gh/
+hosts.yml
+
+# Logs, sockets and runtime state
+*.log
+*.sock
+*.pid
+session.json
+.plugins.lock
+
+# Backups made by editors, installers and me
+*.bak
+*.bak-*
+*.bak.*
+*.pre-*
+*~
+
+# Caches
+__pycache__/
+.cache/

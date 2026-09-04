@@ -1,0 +1,9 @@
+    workspace "Main"{
+        open-on-output "DP-2"
+    }
+    workspace "Media"{
+        open-on-output "DP-2"
+    }
+    workspace "Discord"{
+	    open-on-output "DP-1"
+    }
