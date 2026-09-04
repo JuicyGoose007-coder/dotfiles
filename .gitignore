@@ -18,6 +18,9 @@ session.json
 *.pre-*
 *~
 
+# Scratch files from scripts
+*.tmp
+
 # Caches
 __pycache__/
 .cache/

@@ -1,6 +1,6 @@
+palette = "noctalia"
 scan_timeout = 100
 
-palette = "noctalia"
 # ~/.config/starship.toml
 
 # Inserts a blank line between shell prompts

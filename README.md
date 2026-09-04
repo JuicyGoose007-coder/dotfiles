@@ -44,8 +44,9 @@ Add `--simulate --verbose=2` to preview without touching anything. Add
 - **niri** — Wayland compositor config, split into `sections/`
 - **noctalia** — shell/greeter theming
 - **limine** — Gruvbox bootloader theme plus its install script
-- **scripts/packages** — `pkglist-native.txt` (149) and `pkglist-aur.txt` (10),
-  with `install.sh` (uses yay) and `update-lists.sh` to regenerate them
+- **scripts/packages** — `pkglist.txt` (88 packages, repo and AUR together),
+  with `install.sh` (bootstraps yay, then installs everything in one pass) and
+  `update-lists.sh` to regenerate the list
 - **starship, kitty, ghostty, yazi, superfile, lazygit, fastfetch, fuzzel** —
   prompt, terminals, file managers, launcher
 - **gtk-3.0 / gtk-4.0 / qt5ct / qt6ct** — toolkit theming

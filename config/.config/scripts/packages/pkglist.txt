@@ -3,6 +3,7 @@ base
 base-devel
 bash-language-server
 bat
+claude-code
 cliphist
 ddcutil
 efibootmgr
@@ -18,6 +19,7 @@ git
 git-filter-repo
 github-cli
 greetd
+herdr-bin
 htop
 imagemagick
 intel-ucode
@@ -35,11 +37,14 @@ man-pages
 mkinitcpio
 mpv
 nano
-network-manager-applet
+neovim-git
 networkmanager
+network-manager-applet
 niri
 noctalia
+noctalia-greeter-git
 nvidia-open
+paru
 pipewire-alsa
 pipewire-pulse
 power-profiles-daemon
@@ -64,6 +69,8 @@ ttf-meslo-nerd
 ttf-nerd-fonts-symbols
 ttf-nerd-fonts-symbols-mono
 typescript-language-server
+vesktop
+vial-keychron-git
 vim
 wget
 wiremix
@@ -74,6 +81,7 @@ xdg-desktop-portal-gnome
 xdg-utils
 xorg-xwayland
 xwayland-satellite
+yay-bin
 yazi
 zoxide
 zram-generator
