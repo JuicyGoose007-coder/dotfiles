@@ -1,0 +1,15 @@
+# System services (sudo systemctl enable ...)
+greetd.service
+NetworkManager-dispatcher.service
+NetworkManager-wait-online.service
+NetworkManager.service
+fstrim.timer
+
+# User services (systemctl --user enable ...)
+pipewire-pulse.service
+pipewire.service
+wireplumber.service
+xdg-user-dirs.service
+p11-kit-server.socket
+pipewire-pulse.socket
+pipewire.socket

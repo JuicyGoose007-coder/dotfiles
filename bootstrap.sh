@@ -15,4 +15,6 @@ sudo pacman -S --needed --noconfirm stow
 echo ":: Linking configs into \$HOME"
 stow --dir="$src" --target="$HOME" --restow config shell homescripts
 
+echo ":: System config (/etc, services) is NOT applied automatically."
+echo "   Review and run: $src/system/restore.sh"
 echo ":: Done. Log out and back in."

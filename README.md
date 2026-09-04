@@ -30,6 +30,10 @@ homescripts/scripts/     ->  ~/scripts
 | `shell` | `.zshrc` |
 | `homescripts` | `~/scripts` — standalone shell scripts |
 
+`system/` is **not** a stow package — it holds the parts that live outside
+`$HOME` and need root. Apply it with `system/restore.sh`, which copies into
+`/etc`, enables the services in `services-enabled.txt`, and rebuilds the UKI.
+
 To link them by hand:
 
 ```sh
@@ -52,6 +56,20 @@ Add `--simulate --verbose=2` to preview without touching anything. Add
 - **gtk-3.0 / gtk-4.0 / qt5ct / qt6ct** — toolkit theming
 - **mimeapps.list, user-dirs.dirs, xdg-terminals.list** — default apps and
   XDG paths
+
+## System config (`system/`)
+
+Captured because a package list alone cannot rebuild these:
+
+- `etc/greetd/config.toml` + `etc/pam.d/greetd` — the login screen, pointed at
+  `noctalia-greeter-session`. Stock greetd would not launch it.
+- `etc/mkinitcpio.conf` + `etc/mkinitcpio.d/linux.preset` — this machine boots a
+  UKI (kernel and initramfs fused into one `.efi`), which the preset defines.
+- `etc/pacman.d/hooks/99-limine.hook` — redeploys Limine after every upgrade.
+- `etc/systemd/zram-generator.conf` — zstd-compressed zram swap.
+- `etc/vconsole.conf`, `etc/locale.conf`, `etc/hostname`
+- `services-enabled.txt` — `greetd`, `NetworkManager`, `fstrim.timer` and the
+  pipewire user units. Installing a package does not enable it.
 
 ## Not in here
 
