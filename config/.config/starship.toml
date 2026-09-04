@@ -1,6 +1,5 @@
-scan_timeout = 100
-
 palette = "noctalia"
+scan_timeout = 100
 
 # >>> NOCTALIA STARSHIP PALETTE >>>
 # Noctalia Starship Palette
