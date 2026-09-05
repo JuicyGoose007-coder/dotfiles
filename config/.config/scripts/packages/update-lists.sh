@@ -2,7 +2,7 @@
 # Refresh pkglist.txt from what is installed right now.
 #
 # WARNING: the committed list is hand-trimmed (65 unused Nerd Fonts, fish,
-# vifm, alacritty, tmux, brave-bin, zen-browser-bin). A raw snapshot adds them
+# vifm, alacritty, brave-bin, zen-browser-bin). A raw snapshot adds them
 # all back. Review `git -C ~/dotfiles diff` afterwards.
 set -euo pipefail
 src="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
