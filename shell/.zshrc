@@ -25,7 +25,6 @@ setopt PROMPT_SUBST
 export EDITOR="nvim"
 export VISUAL="nvim"
 export COLORTERM="truecolor"
-export TERM="xterm-256color"
 
 # ============================================================================
 # HISTORY CONFIGURATION
@@ -190,6 +189,10 @@ alias gd='git diff'
 # Lazygit
 alias lg='lazygit'
 
+# Tmux
+alias tn='tmux new-session -A -s'
+alias tk='tmux kill-session -t'
+
 alias rm='rm -i'
 alias cp='cp -i'
 alias mv='mv -i'
@@ -256,18 +259,18 @@ function zvm_after_select_vi_mode {
   esac
 }
 
-# if [[ -o interactive ]]; then 
-#     if [[ -z "$TMUX" ]]; then
-#         fastfetch
-#     elif [[ "$(tmux display -p '#{pane_index}')" == "$(tmux show -gv pane-base-index)" ]]; then
-#         fastfetch
-#     fi
-# fi
-
-if [[ ! -f /dev/shm/fastfetch_launched ]]; then
-    fastfetch
-    touch /dev/shm/fastfetch_launched
+if [[ -o interactive ]]; then
+    if [[ -z "$TMUX" ]]; then
+        fastfetch
+    elif [[ "$(tmux display -p '#{pane_index}')" == "$(tmux show -gv pane-base-index)" ]]; then
+        fastfetch
+    fi
 fi
+
+# if [[ ! -f /dev/shm/fastfetch_launched ]]; then
+#     fastfetch
+#     touch /dev/shm/fastfetch_launched
+# fi
 
 export STARSHIP_CONFIG=~/.config/starship/starship.toml
 eval "$(starship init zsh)"
