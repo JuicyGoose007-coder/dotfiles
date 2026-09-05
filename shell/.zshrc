@@ -162,7 +162,7 @@ alias pd='~/scripts/powerdown.sh'
 # Programs
 alias nv='nvim'
 alias rb='reboot'
-alias rt='ripride'
+alias rt='riptide'
 alias wm='wiremix'
 alias y='yazi'
 
