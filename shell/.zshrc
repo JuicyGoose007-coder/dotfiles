@@ -13,12 +13,6 @@ source "${ZINIT_HOME}/zinit.zsh"
 unalias zi 2>/dev/null || true 
 
 # ============================================================================
-# BASIC ZSH CONFIGURATION
-# ============================================================================
-
-setopt PROMPT_SUBST
-
-# ============================================================================
 # EDITOR
 # ============================================================================
 
@@ -34,8 +28,6 @@ HISTSIZE=10000
 SAVEHIST=10000
 HISTFILE=~/.zsh_history
 
-setopt APPEND_HISTORY
-setopt INC_APPEND_HISTORY
 setopt HIST_IGNORE_ALL_DUPS
 setopt HIST_SAVE_NO_DUPS
 setopt HIST_IGNORE_SPACE
@@ -85,10 +77,11 @@ zstyle ':fzf-tab:*' fzf-flags '--color=bg+:#3c3836,bg:#282828,spinner:#8ec07c,hl
 # ============================================================================
 
 if command -v fzf >/dev/null 2>&1; then
-    export FZF_DEFAULT_OPTS="
-    --color=bg+:#262626,bg:#161616,spinner:#be95ff,hl:#33b1ff
-    --color=fg:#f2f4f8,header:#33b1ff,info:#be95ff,pointer:#ff7eb6
-    --color=marker:#3ddbd9,fg+:#f2f4f8,prompt:#be95ff,hl+:#ff7eb6"
+    # Gruvbox dark
+    export FZF_DEFAULT_OPTS="--color=bg+:#3c3836,bg:#282828,spinner:#8ec07c,hl:#83a598,fg:#d5c4a1,header:#83a598,info:#fabd2f,pointer:#8ec07c,marker:#8ec07c,fg+:#ebdbb2,prompt:#fabd2f,hl+:#83a598"
+
+    # Carbon (alternative theme)
+    # export FZF_DEFAULT_OPTS="--color=bg+:#262626,bg:#161616,spinner:#be95ff,hl:#33b1ff,fg:#f2f4f8,header:#33b1ff,info:#be95ff,pointer:#ff7eb6,marker:#3ddbd9,fg+:#f2f4f8,prompt:#be95ff,hl+:#ff7eb6"
 
     source <(fzf --zsh) 2>/dev/null || true
 fi
@@ -160,17 +153,16 @@ alias ..='cd ..'
 alias ...='cd ../..'
 alias ....='cd ../../..'
 alias ~='cd ~'
-alias cd='z'
 alias h='history'
 alias j='jobs'
 alias c='clear'
-alias kill='pkill -9 '
 alias bios='systemctl reboot --firmware-setup'
 alias pd='~/scripts/powerdown.sh'
 
 # Programs
 alias nv='nvim'
 alias rb='reboot'
+alias rt='ripride'
 alias wm='wiremix'
 alias y='yazi'
 
@@ -193,16 +185,12 @@ alias lg='lazygit'
 alias tn='tmux new-session -A -s'
 alias tk='tmux kill-session -t'
 
-alias rm='rm -i'
-alias cp='cp -i'
-alias mv='mv -i'
-
 # ============================================================================
 # FUNCTIONS
 # ============================================================================
 
 mkcd() {
-    mkdir -p "$1" && cd "$1"
+    mkdir -p "$1" && builtin cd "$1"
 }
 
 extract() {
@@ -281,5 +269,4 @@ eval "$(starship init zsh)"
 [ -s "$HOME/.config/envman/load.sh" ] && source "$HOME/.config/envman/load.sh"
 
 export BAT_THEME="gruvbox-dark"
-export FZF_DEFAULT_OPTS="$FZF_DEFAULT_OPTS --color=bg+:#3c3836,bg:#282828,spinner:#8ec07c,hl:#83a598,fg:#d5c4a1,header:#83a598,info:#fabd2f,pointer:#8ec07c,marker:#8ec07c,fg+:#ebdbb2,prompt:#fabd2f,hl+:#83a598"
 
