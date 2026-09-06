@@ -268,5 +268,17 @@ eval "$(starship init zsh)"
 # Generated for envman. Do not edit.
 [ -s "$HOME/.config/envman/load.sh" ] && source "$HOME/.config/envman/load.sh"
 
+# ============================================================================
+# KITTY SHELL INTEGRATION
+# ============================================================================
+
+ if [[ -n "$KITTY_WINDOW_ID" ]]; then
+     if (( $+functions[_ksi_deferred_init] )); then
+         precmd_functions=(${precmd_functions:#_ksi_deferred_init} _ksi_deferred_init)
+     elif (( $+functions[_ksi_precmd] )); then
+         precmd_functions=(${precmd_functions:#_ksi_precmd} _ksi_precmd)
+     fi
+ fi
+
 export BAT_THEME="gruvbox-dark"
 
