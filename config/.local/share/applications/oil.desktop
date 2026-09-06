@@ -1,0 +1,13 @@
+[Desktop Entry]
+Type=Application
+Name=Oil
+GenericName=File Manager
+Comment=Edit a directory as an ordinary Neovim buffer
+TryExec=nvim
+Exec=kitty --class oil -e nvim -- %f
+Icon=nvim
+Terminal=false
+Categories=System;FileManager;FileTools;ConsoleOnly;
+MimeType=inode/directory;
+Keywords=File;Manager;Explorer;Browser;oil;
+StartupNotify=false

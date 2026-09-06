@@ -7,7 +7,7 @@ binds {
     MOD+RETURN                          hotkey-overlay-title="Open Terminal: kitty" { spawn-sh "kitty"; }
     MOD+D                               hotkey-overlay-title="Open App Launcher: fuzzel" { spawn-sh "fuzzel"; }
     MOD+B                               hotkey-overlay-title="Open Browser: firefox" { spawn-sh "firefox"; }
-    MOD+O                               hotkey-overlay-title="Open Browser: brave" { spawn-sh "brave"; }
+    MOD+O                               hotkey-overlay-title="Open File Manager: oil" { spawn-sh "kitty --class oil -e nvim ~"; }
     MOD+ALT+L                           hotkey-overlay-title="Lock Screen" { spawn-sh "noctalia msg session lock"; }
     MOD+T                               hotkey-overlay-title="Toggle Opacity" { toggle-window-rule-opacity; }
     MOD+S                               hotkey-overlay-title="Open Superfile" { spawn "kitty" "-e" "spf"; }

@@ -112,6 +112,20 @@
         opacity 0.9
     }
 
+    // oil launched as a file manager. It floats rather than taking a column:
+    // you open it, grab a file, and close it, so it should not reshuffle the
+    // workspace on the way in and out.
+    window-rule{
+        match app-id="oil"
+        open-floating true
+        open-fullscreen false
+        open-focused true
+        default-column-width { proportion 0.6; }
+        default-window-height { proportion 0.7; }
+        opacity 0.9
+        draw-border-with-background false
+    }
+
     window-rule{
         match title="vesktop"
         match app-id="vesktop"

@@ -193,6 +193,13 @@ mkcd() {
     mkdir -p "$1" && builtin cd "$1"
 }
 
+# Oil is also the system file manager (see the oil.desktop entry), so it should
+# open the same way from a shell. oil.nvim hijacks netrw, so nvim on a
+# directory lands in an oil buffer. Bare `oil` takes $PWD.
+oil() {
+    nvim "${1:-.}"
+}
+
 extract() {
     if [[ -f $1 ]]; then
         case $1 in
