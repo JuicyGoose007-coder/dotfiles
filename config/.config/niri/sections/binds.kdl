@@ -10,7 +10,6 @@ binds {
     MOD+O                               hotkey-overlay-title="Open File Manager: oil" { spawn-sh "kitty --class oil -e nvim ~"; }
     MOD+ALT+L                           hotkey-overlay-title="Lock Screen" { spawn-sh "noctalia msg session lock"; }
     MOD+T                               hotkey-overlay-title="Toggle Opacity" { toggle-window-rule-opacity; }
-    MOD+S                               hotkey-overlay-title="Open Superfile" { spawn "kitty" "-e" "spf"; }
     MOD+Y                               hotkey-overlay-title="Open Yazi" { spawn "kitty" "-e" "yazi"; }
 
     
