@@ -5,13 +5,38 @@ throughout. Managed with [GNU Stow](https://www.gnu.org/software/stow/).
 
 ## Fresh install
 
+Start from a working base Arch install with a network connection and your user
+account with `sudo`. Then, top to bottom:
+
 ```sh
-git clone git@github.com:JuicyGoose007-coder/dotfiles.git ~/dotfiles
+# Arch's `base` does not ship git, and a new machine has no SSH key yet,
+# so this first clone has to be HTTPS.
+sudo pacman -Sy git
+git clone https://github.com/JuicyGoose007-coder/dotfiles.git ~/dotfiles
+
+# packages, stow, symlinks, login shell
 ~/dotfiles/bootstrap.sh
+
+# /etc, services and the UKI. Needs root, prompts before overwriting.
+~/dotfiles/system/restore.sh
+
+# Neovim lives in its own repo and is not installed by bootstrap.sh
+git clone https://github.com/JuicyGoose007-coder/minimal-nvim.git ~/Projects/nvim
+ln -s ~/Projects/nvim ~/.config/nvim
+
+reboot
 ```
 
-That installs every package, installs stow, and symlinks the configs into
-`$HOME`. Log out and back in afterwards.
+Reboot rather than just logging out: `restore.sh` rebuilds the boot image and
+enables `greetd`.
+
+Once you have added an SSH key to GitHub, switch the remotes over so you can
+push:
+
+```sh
+git -C ~/dotfiles remote set-url origin git@github.com:JuicyGoose007-coder/dotfiles.git
+git -C ~/Projects/nvim remote set-url origin git@github.com:JuicyGoose007-coder/minimal-nvim.git
+```
 
 ## Layout
 
