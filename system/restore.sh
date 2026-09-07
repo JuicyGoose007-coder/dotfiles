@@ -52,20 +52,71 @@ for u in "${user_units[@]}"; do
   systemctl --user enable "$u" || echo "!! could not enable --user $u (skipped)"
 done
 
-echo ":: Rebuilding the UKI (mkinitcpio.conf and linux.preset just changed)"
-sudo mkinitcpio -P
+# Rebuild the boot image. Which command is right depends on how this machine
+# boots, so detect it rather than assume.
+#
+# With limine-mkinitcpio-hook installed, /etc/pacman.d/hooks/90-mkinitcpio-install.hook
+# shadows Arch's stock hook of the same name (/etc/pacman.d/hooks wins over
+# /usr/share/libalpm/hooks), and kernel builds go through
+# limine-mkinitcpio-install instead. That calls `mkinitcpio --generate` directly
+# and ignores /etc/mkinitcpio.d/*.preset entirely: vmlinuz and initramfs land in
+# /boot/<machine-id>/<kernel>/ and are registered in limine.conf. On such a
+# machine the preset's UKI is never rebuilt and never booted, so checking it
+# would pass while telling you nothing.
+if command -v limine-mkinitcpio >/dev/null 2>&1; then
+  echo ":: Rebuilding initramfs via limine-mkinitcpio"
+  sudo limine-mkinitcpio
 
-# linux.preset builds a single image (PRESETS=('default'), fallback commented
-# out) and limine.conf has one entry pointing at it. If it is missing there is
-# nothing else to boot, so check before saying "done".
-uki="/boot/EFI/Linux/arch-linux.efi"
-if ! sudo test -s "$uki"; then
-  echo "!! $uki is missing or empty -- DO NOT REBOOT."
-  echo "   There is no fallback image. Fix /etc/mkinitcpio.conf, then re-run:"
-  echo "     sudo mkinitcpio -P"
-  exit 1
+  # Check what actually boots: every kernel directory needs both halves, and
+  # limine.conf needs at least one entry to point at them.
+  #
+  # Find kernel directories by looking for a plain `vmlinuz`, not by listing
+  # subdirectories. limine-snapper-sync keeps a limine_history/ store next to
+  # them holding the snapshots' kernels, and those are hash-suffixed
+  # (vmlinuz_sha256_...), so listing directories would flag it as a broken
+  # kernel and fail every run.
+  mid="$(cat /etc/machine-id)"
+  kdirs=()
+  mapfile -t kdirs < <(
+    sudo find "/boot/$mid" -mindepth 2 -maxdepth 2 -type f -name vmlinuz -printf '%h\n' 2>/dev/null | sort -u
+  )
+
+  ok=1
+  if ((${#kdirs[@]} == 0)); then
+    echo "!! No kernel found under /boot/$mid"
+    ok=0
+  fi
+  for d in "${kdirs[@]}"; do
+    for f in vmlinuz initramfs; do
+      sudo test -s "$d/$f" || { echo "!! $d/$f is missing or empty"; ok=0; }
+    done
+  done
+
+  entries="$(sudo grep -c '^/' /boot/limine.conf 2>/dev/null || true)"
+  ((${entries:-0} > 0)) || { echo "!! /boot/limine.conf has no boot entries"; ok=0; }
+
+  if ((ok == 0)); then
+    echo "   DO NOT REBOOT. Fix /etc/mkinitcpio.conf, then re-run:"
+    echo "     sudo limine-mkinitcpio"
+    exit 1
+  fi
+  echo ":: Boot files OK: ${#kdirs[@]} kernel(s) under /boot/$mid, $entries entries in limine.conf"
+else
+  echo ":: Rebuilding the UKI (mkinitcpio.conf and linux.preset just changed)"
+  sudo mkinitcpio -P
+
+  # linux.preset builds a single image (PRESETS=('default'), fallback commented
+  # out) and limine.conf has one entry pointing at it. If it is missing there is
+  # nothing else to boot, so check before saying "done".
+  uki="/boot/EFI/Linux/arch-linux.efi"
+  if ! sudo test -s "$uki"; then
+    echo "!! $uki is missing or empty -- DO NOT REBOOT."
+    echo "   There is no fallback image. Fix /etc/mkinitcpio.conf, then re-run:"
+    echo "     sudo mkinitcpio -P"
+    exit 1
+  fi
+  echo ":: UKI built: $uki"
 fi
-echo ":: UKI built: $uki"
 
 echo ":: Done. Reboot."
 if [[ -n "$backup" ]]; then

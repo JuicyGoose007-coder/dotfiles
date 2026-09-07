@@ -1,9 +1,9 @@
 7zip
-qbittorrent
 base
 base-devel
 bash-language-server
 bat
+btrfs-progs
 claude-code
 cliphist
 ddcutil
@@ -29,6 +29,8 @@ lazygit
 less
 libva-nvidia-driver
 limine
+limine-mkinitcpio-hook
+limine-snapper-sync
 linux
 linux-firmware
 lua-language-server
@@ -52,6 +54,7 @@ power-profiles-daemon
 prettier
 protonplus
 pyright
+qbittorrent
 ripgrep
 ruff
 rust-analyzer
@@ -59,6 +62,8 @@ rust-src
 shellcheck
 shfmt
 smartmontools
+snap-pac
+snapper
 starship
 steam
 stylua

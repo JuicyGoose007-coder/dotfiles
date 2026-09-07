@@ -11,6 +11,10 @@ hosts.yml
 session.json
 .plugins.lock
 
+# Installer-generated desktop entries. These hardcode absolute /opt paths that
+# will not exist on another machine, so they are output, not configuration.
+config/.local/share/applications/claude-code-url-handler.desktop
+
 # Backups made by editors, installers and me
 *.bak
 *.bak-*
