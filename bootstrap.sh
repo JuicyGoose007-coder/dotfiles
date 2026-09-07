@@ -29,14 +29,10 @@ fi
 
 cat <<EOF
 
-:: Packages, configs and shell are done. Two steps left:
+:: Packages, configs and shell are done. One step left:
 
-   1. System config (/etc, services, UKI) -- needs root, review first:
-        $src/system/restore.sh
-
-   2. Neovim config, which lives in its own repo:
-        git clone https://github.com/JuicyGoose007-coder/minimal-nvim.git ~/Projects/nvim
-        ln -s ~/Projects/nvim ~/.config/nvim
+   System config (/etc, services, UKI) -- needs root, review first:
+     $src/system/restore.sh
 
    Then reboot.
 EOF

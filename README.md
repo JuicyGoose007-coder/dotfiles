@@ -20,10 +20,6 @@ git clone https://github.com/JuicyGoose007-coder/dotfiles.git ~/dotfiles
 # /etc, services and the UKI. Needs root, prompts before overwriting.
 ~/dotfiles/system/restore.sh
 
-# Neovim lives in its own repo and is not installed by bootstrap.sh
-git clone https://github.com/JuicyGoose007-coder/minimal-nvim.git ~/Projects/nvim
-ln -s ~/Projects/nvim ~/.config/nvim
-
 reboot
 ```
 
@@ -35,7 +31,6 @@ push:
 
 ```sh
 git -C ~/dotfiles remote set-url origin git@github.com:JuicyGoose007-coder/dotfiles.git
-git -C ~/Projects/nvim remote set-url origin git@github.com:JuicyGoose007-coder/minimal-nvim.git
 ```
 
 ## Layout
