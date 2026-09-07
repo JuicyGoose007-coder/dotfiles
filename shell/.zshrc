@@ -136,11 +136,6 @@ if command -v nls >/dev/null 2>&1; then
     alias ls='nls'
     alias ll='nls -la'
     alias la='nls -a'
-elif command -v eza >/dev/null 2>&1; then
-    alias ls='eza --color=always'
-    alias ll='eza -la --color=always'
-    alias la='eza -a --color=always'
-    alias lt='eza --tree --color=always'
 else
     alias ls='ls --color=auto'
     alias ll='ls -la --color=auto'
@@ -162,7 +157,6 @@ alias pd='~/scripts/powerdown.sh'
 # Programs
 alias nv='nvim'
 alias rb='reboot'
-alias rt='riptide'
 alias wm='wiremix'
 alias y='yazi'
 

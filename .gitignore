@@ -15,6 +15,7 @@ session.json
 *.bak
 *.bak-*
 *.bak.*
+*.backup*
 *.pre-*
 *~
 

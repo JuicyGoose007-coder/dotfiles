@@ -13,11 +13,22 @@ read -rp "Overwrite /etc files from this repo? [y/N] " ans
 echo ":: Copying /etc files"
 sudo cp -av "$src/etc/." /etc/
 
-echo ":: Enabling system services"
-sudo systemctl enable greetd.service NetworkManager.service fstrim.timer
+# services-enabled.txt is the single source of truth. It is one unit per line,
+# with a "# User services" comment marking where the system half ends and the
+# --user half begins. Blank lines and comments are skipped.
+sys_units=(); user_units=(); target="sys"
+while IFS= read -r line; do
+  [[ "$line" == *"User services"* ]] && target="user"
+  line="${line%%#*}"; line="${line// /}"
+  [[ -z "$line" ]] && continue
+  if [[ "$target" == "sys" ]]; then sys_units+=("$line"); else user_units+=("$line"); fi
+done < "$src/services-enabled.txt"
 
-echo ":: Enabling user services"
-systemctl --user enable pipewire.service pipewire-pulse.service wireplumber.service
+echo ":: Enabling ${#sys_units[@]} system services"
+sudo systemctl enable "${sys_units[@]}"
+
+echo ":: Enabling ${#user_units[@]} user services"
+systemctl --user enable "${user_units[@]}"
 
 echo ":: Rebuilding the UKI (mkinitcpio.conf and linux.preset just changed)"
 sudo mkinitcpio -P
