@@ -1,4 +1,5 @@
 7zip
+qbittorrent
 base
 base-devel
 bash-language-server
