@@ -37,7 +37,6 @@ binds {
 
     // === Window Management ===
     Mod+Q repeat=false { close-window; }
-    Mod+Shift+Q repeat=false  { spawn "/mnt/storage/scripts/killgamescope.sh"; }
     Mod+Shift+F { maximize-column; }
     Mod+F { fullscreen-window; }
     Mod+Shift+T { toggle-window-floating; }
