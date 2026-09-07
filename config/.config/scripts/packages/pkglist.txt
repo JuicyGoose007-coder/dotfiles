@@ -19,7 +19,6 @@ git
 git-filter-repo
 github-cli
 greetd
-herdr-bin
 htop
 imagemagick
 intel-ucode
@@ -44,7 +43,6 @@ niri
 noctalia
 noctalia-greeter-git
 nvidia-open
-paru
 pipewire-alsa
 pipewire-pulse
 power-profiles-daemon
@@ -59,7 +57,6 @@ starship
 steam
 stylua
 sudo
-superfile
 swaybg
 tmux
 tmux-continuum-git
