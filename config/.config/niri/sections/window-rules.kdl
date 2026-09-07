@@ -67,7 +67,7 @@
         match app-id=r#"^steam_app_"#
         open-fullscreen true
         open-focused true
-        open-on-workspace "Media"
+        open-on-workspace "Gaming"
     }
 
     window-rule{
@@ -76,14 +76,14 @@
         default-column-width { proportion 0.5; }
         open-maximized true
         open-focused false
-        open-on-workspace "Media"
+        open-on-workspace "Gaming"
     }
 
     window-rule{
         match app-id=r#"^steam$"#
         default-column-width { proportion 0.5; }
         open-focused false
-        open-on-workspace "Media"
+        open-on-workspace "Gaming"
         open-fullscreen false
         open-maximized true
     }
@@ -138,7 +138,7 @@
     window-rule{
         match app-id="gamescope"
         open-fullscreen true
-        open-on-workspace "Media"
+        open-on-workspace "Gaming"
         open-focused true
     }
 

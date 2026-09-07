@@ -123,7 +123,7 @@ binds {
     Mod+Ctrl+Shift+WheelScrollUp   { move-column-left; }
 
     // === Named Workspaces ===
-    Mod+G { focus-workspace "Media"; }
+    Mod+G { focus-workspace "Gaming"; }
     Mod+M { focus-workspace "Main"; }
     Mod+I { focus-workspace "Discord"; }
     Mod+N { focus-workspace 3; }
@@ -135,7 +135,7 @@ binds {
     Mod+9 { focus-workspace 9; }
 
         // === Move to Named Workspaces ===
-        Mod+Shift+G { move-column-to-workspace "Media"; }
+        Mod+Shift+G { move-column-to-workspace "Gaming"; }
         Mod+Shift+M { move-column-to-workspace "Main"; }
         Mod+Shift+I { move-column-to-workspace "Discord"; }
         Mod+Shift+N { move-column-to-workspace-down; }
