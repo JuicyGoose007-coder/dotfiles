@@ -153,6 +153,7 @@ alias j='jobs'
 alias c='clear'
 alias bios='systemctl reboot --firmware-setup'
 alias pd='~/scripts/powerdown.sh'
+alias pswd-reset='faillock --user $USER --reset'
 
 # Programs
 alias nv='nvim'
