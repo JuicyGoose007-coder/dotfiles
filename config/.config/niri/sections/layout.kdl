@@ -2,7 +2,7 @@
 // https://github.com/YaLTeR/niri/wiki/Configuration:-Layout
 
     layout {
-        gaps 10 // Gap between windows
+        gaps 8 // Gap between windows
 				always-center-single-column
         center-focused-column "never" // Don’t auto-center focused column
 
