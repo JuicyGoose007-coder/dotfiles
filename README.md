@@ -63,7 +63,7 @@ otherwise `mkinitcpio -P`.
 To link them by hand:
 
 ```sh
-stow --dir=$HOME/dotfiles --target=$HOME config shell homescripts
+stow --dir=$HOME/dotfiles --target=$HOME config shell homescripts homepictures
 ```
 
 Add `--simulate --verbose=2` to preview without touching anything. Add

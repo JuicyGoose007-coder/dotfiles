@@ -12,7 +12,7 @@ echo ":: Installing stow"
 sudo pacman -S --needed --noconfirm stow
 
 echo ":: Linking configs into \$HOME"
-stow --dir="$src" --target="$HOME" --restow config shell homescripts
+stow --dir="$src" --target="$HOME" --restow config shell homescripts homepictures
 
 if [[ "$SHELL" != *zsh ]]; then
   echo ":: Making zsh the login shell"
