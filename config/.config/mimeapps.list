@@ -1,5 +1,5 @@
 [Default Applications]
-application/xhtml+xml=firefox.desktop
+application/xhtml+xml=zen.desktop
 audio/aac=mpv.desktop
 audio/mpeg=mpv.desktop
 audio/ogg=mpv.desktop
@@ -7,7 +7,7 @@ audio/wav=mpv.desktop
 audio/webm=mpv.desktop
 audio/x-flac=mpv.desktop
 inode/directory=oil.desktop
-text/html=firefox.desktop
+text/html=zen.desktop
 video/avi=mpv.desktop
 video/mp4=mpv.desktop
 video/mpeg=mpv.desktop
@@ -16,13 +16,13 @@ video/webm=mpv.desktop
 video/x-matroska=mpv.desktop
 video/x-msvideo=mpv.desktop
 x-scheme-handler/file=yazi.desktop
-x-scheme-handler/http=firefox.desktop
-x-scheme-handler/https=firefox.desktop
+x-scheme-handler/http=zen.desktop
+x-scheme-handler/https=zen.desktop
 x-scheme-handler/discord=vesktop.desktop
 x-scheme-handler/claude-cli=claude-code-url-handler.desktop
 
 [Added Associations]
-application/xhtml+xml=firefox.desktop;
+application/xhtml+xml=zen.desktop;firefox.desktop;
 audio/aac=mpv.desktop;
 audio/mpeg=mpv.desktop;
 audio/ogg=mpv.desktop;
@@ -30,7 +30,7 @@ audio/wav=mpv.desktop;
 audio/webm=mpv.desktop;
 audio/x-flac=mpv.desktop;
 inode/directory=yazi.desktop;
-text/html=firefox.desktop;
+text/html=zen.desktop;firefox.desktop;
 video/avi=mpv.desktop;
 video/mp4=mpv.desktop;
 video/mpeg=mpv.desktop;
@@ -39,8 +39,8 @@ video/webm=mpv.desktop;
 video/x-matroska=mpv.desktop;
 video/x-msvideo=mpv.desktop;
 x-scheme-handler/file=yazi.desktop;
-x-scheme-handler/http=firefox.desktop;
-x-scheme-handler/https=firefox.desktop;
+x-scheme-handler/http=zen.desktop;firefox.desktop;
+x-scheme-handler/https=zen.desktop;firefox.desktop;
 
 [Removed Associations]
 
