@@ -1,11 +1,6 @@
 #!/usr/bin/env bash
-# Set up a fresh Arch machine from this repo.
-#   1. install every package this system had
-#   2. install stow
-#   3. symlink every package into $HOME
-#   4. make zsh the login shell
-#
-# Assumes a working base Arch install with sudo and a network connection.
+# Set up a fresh Arch machine: packages, stow symlinks, login shell.
+# Assumes a base Arch install with sudo and network.
 # Does NOT touch /etc -- run system/restore.sh for that.
 set -euo pipefail
 src="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
@@ -19,7 +14,6 @@ sudo pacman -S --needed --noconfirm stow
 echo ":: Linking configs into \$HOME"
 stow --dir="$src" --target="$HOME" --restow config shell homescripts
 
-# zsh is in pkglist, so it is installed by now. chsh prompts for your password.
 if [[ "$SHELL" != *zsh ]]; then
   echo ":: Making zsh the login shell"
   chsh -s /usr/bin/zsh

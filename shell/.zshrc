@@ -191,9 +191,7 @@ mkcd() {
     mkdir -p "$1" && builtin cd "$1"
 }
 
-# Oil is also the system file manager (see the oil.desktop entry), so it should
-# open the same way from a shell. oil.nvim hijacks netrw, so nvim on a
-# directory lands in an oil buffer. Bare `oil` takes $PWD.
+# Open a directory in oil.nvim, matching the oil.desktop file manager entry.
 oil() {
     nvim "${1:-.}"
 }

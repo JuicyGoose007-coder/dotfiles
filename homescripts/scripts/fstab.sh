@@ -1,7 +1,6 @@
 #!/bin/bash
-# Add the shared Games drive to /etc/fstab. It is shared between distros, so
-# nofail matters: without it a boot with the drive absent or claimed elsewhere
-# drops to an emergency shell instead of carrying on.
+# Add the shared Games drive to /etc/fstab.
+# nofail: a missing drive must not drop the boot to an emergency shell.
 set -euo pipefail
 
 uuid="0ca9f5bb-3aa4-4050-8e12-5b69d3296659"
