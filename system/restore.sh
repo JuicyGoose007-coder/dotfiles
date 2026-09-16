@@ -40,7 +40,7 @@ while read -r pin _; do
     echo "!! No IgnorePkg line in /etc/pacman.conf -- add '$pin' by hand."
   fi
   pacman-conf IgnorePkg | grep -qx "$pin" || echo "!! $pin is still not pinned"
-done < "$src/../config/.config/scripts/packages/pins.txt"
+done < "$src/../scripts/packages/pins.txt"
 
 # Split services-enabled.txt at its "User services" marker.
 sys_units=(); user_units=(); target="sys"

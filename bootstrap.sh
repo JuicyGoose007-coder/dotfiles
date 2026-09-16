@@ -6,7 +6,7 @@ set -euo pipefail
 src="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 echo ":: Installing packages"
-"$src/config/.config/scripts/packages/install.sh"
+"$src/scripts/packages/install.sh"
 
 echo ":: Installing stow"
 sudo pacman -S --needed --noconfirm stow
