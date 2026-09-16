@@ -1,0 +1,4 @@
+# Packages held at a version: "<name> <version>". Why: niri/NOTES.md
+# install.sh installs these; restore.sh adds the names to IgnorePkg.
+
+xwayland-satellite 0.8.1-2

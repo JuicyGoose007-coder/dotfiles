@@ -39,6 +39,7 @@ man-pages
 mkinitcpio
 mpv
 nano
+nautilus
 neovim-git
 networkmanager
 network-manager-applet
@@ -48,6 +49,7 @@ noctalia
 noctalia-greeter-git
 nvidia-open
 obsidian
+paru
 pipewire-alsa
 pipewire-pulse
 power-profiles-daemon
@@ -92,8 +94,8 @@ xdg-desktop-portal-gnome
 xdg-utils
 xorg-xwayland
 xwayland-satellite
-yay-bin
 yazi
+zen-browser-bin
 zoxide
 zram-generator
 zsh

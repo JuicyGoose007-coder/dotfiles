@@ -1,9 +1,7 @@
 #!/usr/bin/env bash
 # Refresh pkglist.txt from what is installed right now.
-#
-# WARNING: the committed list is hand-trimmed (65 unused Nerd Fonts, fish,
-# vifm, alacritty, brave-bin, zen-browser-bin, paru). A raw snapshot adds them
-# all back. Review `git -C ~/dotfiles diff` afterwards.
+# The committed list is hand-trimmed; a raw snapshot adds the junk back
+# (unused Nerd Fonts, *-debug packages). Review the diff afterwards.
 set -euo pipefail
 src="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 

@@ -1,18 +1,13 @@
 #!/usr/bin/env bash
-# Restore the system-level config that lives outside $HOME.
-# Run AFTER install.sh, on a fresh machine. Not managed by stow: these paths
-# need root, and stow only links into $HOME.
-#
-# WARNING: this overwrites files in /etc. Read `etc/` first if unsure.
+# Restore system config outside $HOME: /etc, services, boot image.
+# Run after install.sh. WARNING: overwrites files in /etc.
 set -euo pipefail
 src="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 read -rp "Overwrite /etc files from this repo? [y/N] " ans
 [[ "$ans" == [yY]* ]] || { echo "Aborted."; exit 1; }
 
-# Back up whatever is about to be overwritten. The list comes from the repo's
-# own etc/ tree, so it never drifts. On a fresh machine some of these do not
-# exist yet -- skip those rather than failing.
+# Back up only the /etc files this repo is about to overwrite.
 backup="$HOME/etc-backup-$(date +%Y%m%d-%H%M%S).tar.gz"
 mapfile -t want < <(cd "$src/etc" && find . -type f -printf '%P\n')
 have=()
@@ -29,9 +24,25 @@ fi
 echo ":: Copying /etc files"
 sudo cp -av "$src/etc/." /etc/
 
-# services-enabled.txt is the single source of truth. It is one unit per line,
-# with a "# User services" comment marking where the system half ends and the
-# --user half begins. Blank lines and comments are skipped.
+# Add every name in pins.txt to IgnorePkg. pacman.conf is edited in place
+# rather than copied in, so the rest of it stays stock.
+while read -r pin _; do
+  [[ -z "$pin" || "$pin" == \#* ]] && continue
+  if pacman-conf IgnorePkg 2>/dev/null | grep -qx "$pin"; then
+    echo ":: $pin is already pinned"
+  elif grep -qE '^[[:space:]]*IgnorePkg[[:space:]]*=' /etc/pacman.conf; then
+    sudo sed -i -E "0,/^[[:space:]]*IgnorePkg[[:space:]]*=.*/s//& $pin/" /etc/pacman.conf
+    echo ":: Added $pin to IgnorePkg"
+  elif grep -qE '^[[:space:]]*#[[:space:]]*IgnorePkg[[:space:]]*=' /etc/pacman.conf; then
+    sudo sed -i -E "0,/^[[:space:]]*#[[:space:]]*IgnorePkg[[:space:]]*=.*/s//IgnorePkg   = $pin/" /etc/pacman.conf
+    echo ":: Pinned $pin"
+  else
+    echo "!! No IgnorePkg line in /etc/pacman.conf -- add '$pin' by hand."
+  fi
+  pacman-conf IgnorePkg | grep -qx "$pin" || echo "!! $pin is still not pinned"
+done < "$src/../config/.config/scripts/packages/pins.txt"
+
+# Split services-enabled.txt at its "User services" marker.
 sys_units=(); user_units=(); target="sys"
 while IFS= read -r line; do
   [[ "$line" == *"User services"* ]] && target="user"
@@ -40,8 +51,7 @@ while IFS= read -r line; do
   if [[ "$target" == "sys" ]]; then sys_units+=("$line"); else user_units+=("$line"); fi
 done < "$src/services-enabled.txt"
 
-# Enable one at a time. A unit that is missing deserves a warning, not an abort
-# that leaves /etc holding a new mkinitcpio.conf the boot image never matched.
+# Warn on a missing unit rather than aborting mid-restore.
 echo ":: Enabling ${#sys_units[@]} system services"
 for u in "${sys_units[@]}"; do
   sudo systemctl enable "$u" || echo "!! could not enable $u (skipped)"
@@ -52,29 +62,14 @@ for u in "${user_units[@]}"; do
   systemctl --user enable "$u" || echo "!! could not enable --user $u (skipped)"
 done
 
-# Rebuild the boot image. Which command is right depends on how this machine
-# boots, so detect it rather than assume.
-#
-# With limine-mkinitcpio-hook installed, /etc/pacman.d/hooks/90-mkinitcpio-install.hook
-# shadows Arch's stock hook of the same name (/etc/pacman.d/hooks wins over
-# /usr/share/libalpm/hooks), and kernel builds go through
-# limine-mkinitcpio-install instead. That calls `mkinitcpio --generate` directly
-# and ignores /etc/mkinitcpio.d/*.preset entirely: vmlinuz and initramfs land in
-# /boot/<machine-id>/<kernel>/ and are registered in limine.conf. On such a
-# machine the preset's UKI is never rebuilt and never booted, so checking it
-# would pass while telling you nothing.
+# Rebuild the boot image with whichever tool this machine boots through.
+# limine-mkinitcpio-hook bypasses mkinitcpio presets entirely.
 if command -v limine-mkinitcpio >/dev/null 2>&1; then
   echo ":: Rebuilding initramfs via limine-mkinitcpio"
   sudo limine-mkinitcpio
 
-  # Check what actually boots: every kernel directory needs both halves, and
-  # limine.conf needs at least one entry to point at them.
-  #
-  # Find kernel directories by looking for a plain `vmlinuz`, not by listing
-  # subdirectories. limine-snapper-sync keeps a limine_history/ store next to
-  # them holding the snapshots' kernels, and those are hash-suffixed
-  # (vmlinuz_sha256_...), so listing directories would flag it as a broken
-  # kernel and fail every run.
+  # Verify what boots. Match on a plain `vmlinuz` so limine_history/'s
+  # hash-suffixed snapshot kernels are not mistaken for broken ones.
   mid="$(cat /etc/machine-id)"
   kdirs=()
   mapfile -t kdirs < <(
@@ -105,9 +100,7 @@ else
   echo ":: Rebuilding the UKI (mkinitcpio.conf and linux.preset just changed)"
   sudo mkinitcpio -P
 
-  # linux.preset builds a single image (PRESETS=('default'), fallback commented
-  # out) and limine.conf has one entry pointing at it. If it is missing there is
-  # nothing else to boot, so check before saying "done".
+  # Single image, no fallback -- check it exists before saying done.
   uki="/boot/EFI/Linux/arch-linux.efi"
   if ! sudo test -s "$uki"; then
     echo "!! $uki is missing or empty -- DO NOT REBOOT."
