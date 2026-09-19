@@ -126,7 +126,7 @@ alias update='paru -Syu'
 alias pac-upd='sudo pacman -Syu'
 
 # Install/Remove
-alias install='paru -S '
+alias pi='paru -S '
 alias pac-install='sudo pacman -S '
 alias remove='sudo pacman -Rs '
 alias remove-all='sudo pacman -Rns '
