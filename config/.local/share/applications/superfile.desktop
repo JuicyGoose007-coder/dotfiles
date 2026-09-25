@@ -1,0 +1,13 @@
+[Desktop Entry]
+Type=Application
+Name=Superfile
+GenericName=File Manager
+Comment=Modern terminal file manager
+TryExec=spf
+Exec=kitty --class superfile -e spf %f
+Icon=system-file-manager
+Terminal=false
+Categories=System;FileManager;FileTools;ConsoleOnly;
+MimeType=inode/directory;x-scheme-handler/file;
+Keywords=File;Manager;Explorer;Browser;superfile;spf;
+StartupNotify=false
