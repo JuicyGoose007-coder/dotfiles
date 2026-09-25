@@ -23,10 +23,13 @@ fi
 
 cat <<EOF
 
-:: Packages, configs and shell are done. One step left:
+:: Packages, configs and shell are done. Two steps left:
 
    System config (/etc, services, UKI) -- needs root, review first:
      $src/system/restore.sh
 
    Then reboot.
+
+   Zen Browser settings -- start Zen once, quit it, then:
+     $src/zen/zen.sh restore
 EOF

@@ -87,6 +87,12 @@ Add `--simulate --verbose=2` to preview without touching anything. Add
 - **gtk-3.0 / gtk-4.0 / qt5ct / qt6ct** — toolkit theming
 - **mimeapps.list, user-dirs.dirs, xdg-terminals.list** — default apps and
   XDG paths
+- **zen** (repo tooling, not stowed) — Zen Browser settings: `user.js`, CSS,
+  mods and their settings, keyboard shortcuts, containers. Zen names its
+  profile folder at random, so `zen/zen.sh` finds it and copies files in or
+  out. Run `zen/zen.sh save` after changing settings in Zen. On a new machine,
+  start Zen once, quit it, then run `zen/zen.sh restore`. Bookmarks,
+  passwords, history and extensions come back through Zen Sync instead.
 
 ## System config (`system/`)
 
@@ -112,6 +118,7 @@ Captured because a package list alone cannot rebuild these:
 
 ## Not in here
 
-Browser and Discord profiles, `~/.config/gh` (holds a live auth token), binary
+Browser and Discord profiles (only Zen's settings, above — never logins,
+cookies or history), `~/.config/gh` (holds a live auth token), binary
 databases (`dconf`, `pulse`), and the Neovim config — that lives in its own
 repo and is symlinked in from `~/Projects/nvim`.
