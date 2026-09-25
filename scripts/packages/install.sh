@@ -4,6 +4,13 @@
 set -euo pipefail
 src="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
+# steam lives in multilib, which a stock pacman.conf leaves commented out.
+if ! grep -q '^\[multilib\]' /etc/pacman.conf; then
+  echo ":: Enabling multilib"
+  sudo sed -i '/^#\[multilib\]$/,/^#Include/ s/^#//' /etc/pacman.conf
+  grep -q '^\[multilib\]' /etc/pacman.conf || { echo "!! Could not enable multilib in /etc/pacman.conf" >&2; exit 1; }
+fi
+
 echo ":: Bootstrapping"
 sudo pacman -Sy --needed --noconfirm base-devel git
 

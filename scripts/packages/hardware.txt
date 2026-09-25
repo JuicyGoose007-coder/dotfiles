@@ -6,9 +6,9 @@
 #   a+b matches only when both are found.
 cpu:GenuineIntel intel-ucode
 cpu:AuthenticAMD amd-ucode
-gpu:0x10de nvidia-open libva-nvidia-driver
-gpu:0x1002 vulkan-radeon
-gpu:0x8086 vulkan-intel intel-media-driver
+gpu:0x10de nvidia-open libva-nvidia-driver lib32-nvidia-utils
+gpu:0x1002 vulkan-radeon lib32-vulkan-radeon
+gpu:0x8086 vulkan-intel intel-media-driver lib32-vulkan-intel
 boot:limine limine limine-mkinitcpio-hook
 fs:btrfs snapper snap-pac
 boot:limine+fs:btrfs limine-snapper-sync

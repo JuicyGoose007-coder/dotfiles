@@ -97,18 +97,14 @@ if command -v limine-mkinitcpio >/dev/null 2>&1; then
   fi
   echo ":: Boot files OK: ${#kdirs[@]} kernel(s) under /boot/$mid, $entries entries in limine.conf"
 else
-  echo ":: Rebuilding the UKI (mkinitcpio.conf and linux.preset just changed)"
-  sudo mkinitcpio -P
-
-  # Single image, no fallback -- check it exists before saying done.
-  uki="/boot/EFI/Linux/arch-linux.efi"
-  if ! sudo test -s "$uki"; then
-    echo "!! $uki is missing or empty -- DO NOT REBOOT."
-    echo "   There is no fallback image. Fix /etc/mkinitcpio.conf, then re-run:"
+  # The machine's own presets decide where the images go.
+  echo ":: Rebuilding initramfs via mkinitcpio -P"
+  if ! sudo mkinitcpio -P; then
+    echo "!! mkinitcpio -P failed -- DO NOT REBOOT."
+    echo "   Fix /etc/mkinitcpio.conf, then re-run:"
     echo "     sudo mkinitcpio -P"
     exit 1
   fi
-  echo ":: UKI built: $uki"
 fi
 
 echo ":: Done. Reboot."

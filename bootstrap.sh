@@ -12,6 +12,9 @@ echo ":: Installing stow"
 sudo pacman -S --needed --noconfirm stow
 
 echo ":: Linking configs into \$HOME"
+# Stow links a whole folder when it does not exist yet. These must stay real
+# folders, or everything apps write under them lands in the repo.
+mkdir -p "$HOME/.config" "$HOME/.local/share" "$HOME/Pictures"
 stow --dir="$src" --target="$HOME" --restow config shell homescripts homepictures
 
 if [[ "$SHELL" != *zsh ]]; then
@@ -25,7 +28,7 @@ cat <<EOF
 
 :: Packages, configs and shell are done. Two steps left:
 
-   System config (/etc, services, UKI) -- needs root, review first:
+   System config (/etc, services, boot image) -- needs root, review first:
      $src/system/restore.sh
 
    Then reboot.
