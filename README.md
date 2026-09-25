@@ -10,8 +10,9 @@ throughout. Managed with [GNU Stow](https://www.gnu.org/software/stow/).
 > work on any Arch PC, under any username and hostname. Nothing here has run
 > on a fresh install yet, so expect rough edges. What changed:
 >
-> - `install.sh` picks CPU microcode and GPU drivers from
->   `scripts/packages/hardware.txt` instead of hard-coding Intel + NVIDIA.
+> - `install.sh` picks CPU microcode, GPU drivers, and the Limine and snapper
+>   packages from `scripts/packages/hardware.txt`, based on the hardware,
+>   bootloader and root filesystem it finds. They are no longer hard-coded.
 > - `fuzzel.ini`, `zen.sh restore` and `fstab.sh` no longer assume the
 >   `juicygoose007` username.
 > - `/etc/hostname` is no longer tracked or restored.

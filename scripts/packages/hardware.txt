@@ -1,9 +1,14 @@
-# Packages that depend on the machine's hardware. install.sh adds a line's
-# packages only when it finds that CPU or GPU; update-lists.sh keeps them out
-# of pkglist.txt.
-# <cpu:vendor_id | gpu:pci-vendor-id> <packages...>
+# Packages that depend on the machine: its hardware, bootloader and root
+# filesystem. install.sh adds a line's packages only when it finds a match;
+# update-lists.sh keeps them out of pkglist.txt.
+# <match> <packages...>
+#   cpu:<vendor_id>   gpu:<pci vendor id>   boot:limine   fs:<root fstype>
+#   a+b matches only when both are found.
 cpu:GenuineIntel intel-ucode
 cpu:AuthenticAMD amd-ucode
 gpu:0x10de nvidia-open libva-nvidia-driver
 gpu:0x1002 vulkan-radeon
 gpu:0x8086 vulkan-intel intel-media-driver
+boot:limine limine limine-mkinitcpio-hook
+fs:btrfs snapper snap-pac
+boot:limine+fs:btrfs limine-snapper-sync

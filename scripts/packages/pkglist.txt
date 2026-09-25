@@ -26,9 +26,6 @@ jq
 kitty
 lazygit
 less
-limine
-limine-mkinitcpio-hook
-limine-snapper-sync
 linux
 linux-firmware
 lua-language-server
@@ -61,8 +58,6 @@ rust-src
 shellcheck
 shfmt
 smartmontools
-snap-pac
-snapper
 starship
 steam
 stylua

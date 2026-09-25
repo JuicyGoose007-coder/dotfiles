@@ -18,17 +18,26 @@ fi
 
 mapfile -t pkgs < "$src/pkglist.txt"
 
-# Add microcode and GPU drivers for the hardware in this machine.
+# Add microcode, GPU drivers and boot tooling for this machine.
 found=("cpu:$(awk -F': ' '/^vendor_id/{print $2; exit}' /proc/cpuinfo)")
 for d in /sys/bus/pci/devices/*; do
   [[ "$(<"$d/class")" == 0x03* ]] && found+=("gpu:$(<"$d/vendor")")   # 0x03 = display
 done
+# Choosing Limine in the Arch install is what installs the limine package.
+pacman -Q limine >/dev/null 2>&1 && found+=("boot:limine")
+found+=("fs:$(findmnt -no FSTYPE /)")
+
+has() { local f; for f in "${found[@]}"; do [[ "$f" == "$1" ]] && return 0; done; return 1; }
 while read -r -a row; do
   match="${row[0]:-}" extra=("${row[@]:1}")
   [[ -z "$match" || "$match" == \#* ]] && continue
-  for f in "${found[@]}"; do
-    [[ "$f" == "$match" ]] && { echo ":: Found $match, adding ${extra[*]}"; pkgs+=("${extra[@]}"); break; }
-  done
+  IFS=+ read -r -a need <<< "$match"   # a+b: needs both
+  ok=1
+  for n in "${need[@]}"; do has "$n" || ok=0; done
+  if ((ok)); then
+    echo ":: Found $match, adding ${extra[*]}"
+    pkgs+=("${extra[@]}")
+  fi
 done < "$src/hardware.txt"
 
 echo ":: Installing ${#pkgs[@]} packages"
