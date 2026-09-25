@@ -161,7 +161,6 @@ alias reload='source ~/dotfiles/shell/.zshrc'
 alias nv='nvim'
 alias rb='reboot'
 alias wm='wiremix'
-alias y='yazi'
 
 # Orphan pkgs
 alias orphan-check='pacman -Qdtq'

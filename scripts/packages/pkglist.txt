@@ -70,6 +70,7 @@ starship
 steam
 stylua
 sudo
+superfile
 swaybg
 tmux
 tmux-continuum-git
@@ -94,7 +95,6 @@ xdg-desktop-portal-gnome
 xdg-utils
 xorg-xwayland
 xwayland-satellite
-yazi
 zen-browser-bin
 zoxide
 zram-generator

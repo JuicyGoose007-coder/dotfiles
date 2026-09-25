@@ -86,7 +86,7 @@ Add `--simulate --verbose=2` to preview without touching anything. Add
   with `install.sh` (bootstraps `paru` from source, then installs everything in
   one pass), `pins.txt` for packages held at a known-good version, and
   `update-lists.sh` to regenerate the list
-- **starship, kitty, ghostty, tmux, yazi, lazygit, fastfetch, fuzzel** —
+- **starship, kitty, ghostty, tmux, superfile, lazygit, fastfetch, fuzzel** —
   prompt, terminals, multiplexer, file manager, launcher
 - **gtk-3.0 / gtk-4.0 / qt5ct / qt6ct** — toolkit theming
 - **mimeapps.list, user-dirs.dirs, xdg-terminals.list** — default apps and

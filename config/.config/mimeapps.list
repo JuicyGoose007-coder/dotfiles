@@ -29,7 +29,7 @@ audio/ogg=mpv.desktop;
 audio/wav=mpv.desktop;
 audio/webm=mpv.desktop;
 audio/x-flac=mpv.desktop;
-inode/directory=yazi.desktop;
+inode/directory=superfile.desktop;
 text/html=zen.desktop;firefox.desktop;
 video/avi=mpv.desktop;
 video/mp4=mpv.desktop;
@@ -38,7 +38,7 @@ video/quicktime=mpv.desktop;
 video/webm=mpv.desktop;
 video/x-matroska=mpv.desktop;
 video/x-msvideo=mpv.desktop;
-x-scheme-handler/file=yazi.desktop;
+x-scheme-handler/file=superfile.desktop;
 x-scheme-handler/http=zen.desktop;firefox.desktop;
 x-scheme-handler/https=zen.desktop;firefox.desktop;
 
