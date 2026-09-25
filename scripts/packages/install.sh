@@ -16,8 +16,22 @@ if ! command -v paru >/dev/null 2>&1; then
   rm -rf "$tmp"
 fi
 
-echo ":: Installing $(wc -l < "$src/pkglist.txt") packages"
 mapfile -t pkgs < "$src/pkglist.txt"
+
+# Add microcode and GPU drivers for the hardware in this machine.
+found=("cpu:$(awk -F': ' '/^vendor_id/{print $2; exit}' /proc/cpuinfo)")
+for d in /sys/bus/pci/devices/*; do
+  [[ "$(<"$d/class")" == 0x03* ]] && found+=("gpu:$(<"$d/vendor")")   # 0x03 = display
+done
+while read -r -a row; do
+  match="${row[0]:-}" extra=("${row[@]:1}")
+  [[ -z "$match" || "$match" == \#* ]] && continue
+  for f in "${found[@]}"; do
+    [[ "$f" == "$match" ]] && { echo ":: Found $match, adding ${extra[*]}"; pkgs+=("${extra[@]}"); break; }
+  done
+done < "$src/hardware.txt"
+
+echo ":: Installing ${#pkgs[@]} packages"
 paru -Syu --needed --noconfirm "${pkgs[@]}"
 
 # Apply pins.txt. The pass above installs the newest build, so this rolls the

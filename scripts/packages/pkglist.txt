@@ -22,12 +22,10 @@ github-cli
 greetd
 htop
 imagemagick
-intel-ucode
 jq
 kitty
 lazygit
 less
-libva-nvidia-driver
 limine
 limine-mkinitcpio-hook
 limine-snapper-sync
@@ -47,7 +45,6 @@ niri
 nls
 noctalia
 noctalia-greeter-git
-nvidia-open
 obsidian
 paru
 pipewire-alsa

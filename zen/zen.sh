@@ -64,6 +64,10 @@ restore)
     mkdir -p "$profile/$(dirname "$f")"
     cp "$src/$f" "$profile/$f"
   done
+  # The Noctalia imports hold an absolute path saved on another machine.
+  # Point them at this user's home instead.
+  sed -i -E "s|@import \"[^\"]*/\.cache/noctalia/|@import \"$HOME/.cache/noctalia/|" \
+    "$profile/chrome/userChrome.css" "$profile/chrome/userContent.css"
   rm -rf "$profile/chrome/zen-themes"
   cp -r "$src/chrome/zen-themes" "$profile/chrome/zen-themes"
 

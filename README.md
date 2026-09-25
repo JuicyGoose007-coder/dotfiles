@@ -5,6 +5,19 @@ throughout. Managed with [GNU Stow](https://www.gnu.org/software/stow/).
 
 ## Fresh install
 
+> [!WARNING]
+> **Untested on a second machine.** The setup was reworked (Sep 25, 2026) to
+> work on any Arch PC, under any username and hostname. Nothing here has run
+> on a fresh install yet, so expect rough edges. What changed:
+>
+> - `install.sh` picks CPU microcode and GPU drivers from
+>   `scripts/packages/hardware.txt` instead of hard-coding Intel + NVIDIA.
+> - `fuzzel.ini`, `zen.sh restore` and `fstab.sh` no longer assume the
+>   `juicygoose007` username.
+> - `/etc/hostname` is no longer tracked or restored.
+>
+> Remove this note once a fresh install has gone through cleanly.
+
 Start from a working base Arch install with a network connection and your user
 account with `sudo`. Then, top to bottom:
 
@@ -113,7 +126,8 @@ Captured because a package list alone cannot rebuild these:
   applies if you run `mkinitcpio -P` by hand, or on a machine without that hook.
   To rebuild here, use `sudo limine-mkinitcpio`.
 - `etc/systemd/zram-generator.conf` — zstd-compressed zram swap.
-- `etc/vconsole.conf`, `etc/locale.conf`, `etc/hostname`
+- `etc/vconsole.conf`, `etc/locale.conf`. Not `etc/hostname` — each machine
+  keeps the name it got at install.
 - `services-enabled.txt` — `greetd`, `NetworkManager`, `fstrim.timer` and the
   pipewire user units. Installing a package does not enable it.
 - `/etc/pacman.conf` is **not** copied in — it is otherwise stock. `restore.sh`

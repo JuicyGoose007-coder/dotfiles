@@ -8,6 +8,8 @@ src="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 read -rp "This overwrites the trimmed list with a full snapshot. Continue? [y/N] " ans
 [[ "$ans" == [yY]* ]] || { echo "Aborted."; exit 1; }
 
-pacman -Qqe > "$src/pkglist.txt"   # every explicitly installed package, repo + AUR
+# Every explicitly installed package, repo + AUR, minus the hardware.txt ones.
+pacman -Qqe | grep -vxF -f <(awk '!/^#/{for (i = 2; i <= NF; i++) print $i}' "$src/hardware.txt") \
+  > "$src/pkglist.txt"
 echo "packages: $(wc -l < "$src/pkglist.txt")"
 echo "Review with: git -C ~/dotfiles diff"

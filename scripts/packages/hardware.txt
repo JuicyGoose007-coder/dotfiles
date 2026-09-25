@@ -1,0 +1,9 @@
+# Packages that depend on the machine's hardware. install.sh adds a line's
+# packages only when it finds that CPU or GPU; update-lists.sh keeps them out
+# of pkglist.txt.
+# <cpu:vendor_id | gpu:pci-vendor-id> <packages...>
+cpu:GenuineIntel intel-ucode
+cpu:AuthenticAMD amd-ucode
+gpu:0x10de nvidia-open libva-nvidia-driver
+gpu:0x1002 vulkan-radeon
+gpu:0x8086 vulkan-intel intel-media-driver
