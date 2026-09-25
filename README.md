@@ -122,7 +122,7 @@ Captured because a package list alone cannot rebuild these:
 
 ## Not in here
 
-Browser and Discord profiles (only Zen's settings, above — never logins,
-cookies or history), `~/.config/gh` (holds a live auth token), binary
+Browser personal data (logins, cookies, history, bookmarks — Zen Sync covers
+those), the Discord profile, `~/.config/gh` (holds a live auth token), binary
 databases (`dconf`, `pulse`), and the Neovim config — that lives in its own
 repo and is symlinked in from `~/Projects/nvim`.
