@@ -21,6 +21,10 @@ git clone https://github.com/JuicyGoose007-coder/dotfiles.git ~/dotfiles
 ~/dotfiles/system/restore.sh
 
 reboot
+
+# Zen Browser settings. Start Zen once and quit it first, so it creates
+# its profile folder.
+~/dotfiles/zen/zen.sh restore
 ```
 
 Reboot rather than just logging out: `restore.sh` rebuilds the boot image and
@@ -52,7 +56,7 @@ homescripts/scripts/     ->  ~/scripts
 | `shell`       | `.zshrc`                               |
 | `homescripts` | `~/scripts` — standalone shell scripts |
 
-`scripts/` and `system/` are **not** stow packages — they are repo tooling, run
+`scripts/`, `system/` and `zen/` are **not** stow packages — they are repo tooling, run
 from the repo and never symlinked. `system/` holds the parts that live outside
 `$HOME` and need root. Apply it with `system/restore.sh`, which copies into
 `/etc`, enables the services in `services-enabled.txt`, applies the `IgnorePkg`
