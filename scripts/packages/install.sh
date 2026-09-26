@@ -61,4 +61,12 @@ while read -r name ver; do
     || sudo pacman -U --noconfirm "$url-any.pkg.tar.zst"
 done < "$src/pins.txt"
 
+# deja isn't packaged; its installer puts the binary in ~/.local/bin. A zsh
+# $SHELL makes it append a source block to ~/.zshrc, which would block stow
+# and load deja twice next to zinit, so run it with a plain sh.
+if ! command -v deja >/dev/null 2>&1 && [[ ! -x "$HOME/.local/bin/deja" ]]; then
+  echo ":: Installing deja"
+  curl -fsSL https://raw.githubusercontent.com/Giammarco-Ferranti/deja/main/install.sh | SHELL=/bin/sh sh
+fi
+
 echo ":: Done."
