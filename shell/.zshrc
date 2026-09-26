@@ -45,8 +45,12 @@ zinit light jeffreytse/zsh-vi-mode
 zinit ice wait lucid
 zinit light zdharma-continuum/fast-syntax-highlighting
 
-zinit ice wait lucid atload'_zsh_autosuggest_start'
-zinit light zsh-users/zsh-autosuggestions
+# Deja keys: Ctrl+E accepts, Ctrl+N cycles; Tab stays with zsh completion
+export DEJA_ACCEPT_KEY='^E'
+export DEJA_CYCLE_KEY='^N'
+export DEJA_TOGGLE_KEY=''  # leave Ctrl+X free for ^X^K / ^X^L
+zinit ice wait"0" lucid depth=1 pick"deja.plugin.zsh"
+zinit light Giammarco-Ferranti/deja
 
 zinit ice wait lucid blockf atpull'zinit creinstall -q .'
 zinit light zsh-users/zsh-completions
@@ -94,16 +98,12 @@ fi
 function zvm_after_init {
   export VIM_INSERT="I"
 
-  _accept_suggestion() { zle autosuggest-accept }
-  zle -N _accept_suggestion
-
   bindkey -M viins '^I' expand-or-complete
   bindkey -M viins '^R' history-incremental-search-backward
   bindkey -M viins '^S' history-incremental-search-forward
   bindkey -M viins '^[[1;5C' forward-word
   bindkey -M viins '^[[1;5D' backward-word
   bindkey -M viins '^A' beginning-of-line
-  bindkey -M viins '^E' _accept_suggestion
   bindkey -M viins '^[e' end-of-line
   bindkey -M viins '^X^K' kill-line
   bindkey -M viins '^X^L' clear-screen
