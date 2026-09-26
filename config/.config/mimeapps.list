@@ -1,4 +1,5 @@
 [Default Applications]
+application/x-shellscript=nvim-kitty.desktop
 application/xhtml+xml=zen.desktop
 audio/aac=mpv.desktop
 audio/mpeg=mpv.desktop
@@ -8,6 +9,9 @@ audio/webm=mpv.desktop
 audio/x-flac=mpv.desktop
 inode/directory=superfile.desktop
 text/html=zen.desktop
+text/markdown=nvim-kitty.desktop
+text/plain=nvim-kitty.desktop
+text/x-shellscript=nvim-kitty.desktop
 video/avi=mpv.desktop
 video/mp4=mpv.desktop
 video/mpeg=mpv.desktop
@@ -22,6 +26,7 @@ x-scheme-handler/discord=vesktop.desktop
 x-scheme-handler/claude-cli=claude-code-url-handler.desktop
 
 [Added Associations]
+application/x-shellscript=nvim-kitty.desktop;
 application/xhtml+xml=zen.desktop;firefox.desktop;
 audio/aac=mpv.desktop;
 audio/mpeg=mpv.desktop;
@@ -31,6 +36,9 @@ audio/webm=mpv.desktop;
 audio/x-flac=mpv.desktop;
 inode/directory=superfile.desktop;
 text/html=zen.desktop;firefox.desktop;
+text/markdown=nvim-kitty.desktop;
+text/plain=nvim-kitty.desktop;
+text/x-shellscript=nvim-kitty.desktop;
 video/avi=mpv.desktop;
 video/mp4=mpv.desktop;
 video/mpeg=mpv.desktop;

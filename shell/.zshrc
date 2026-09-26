@@ -190,7 +190,7 @@ mkcd() {
     mkdir -p "$1" && builtin cd "$1"
 }
 
-# Open a directory in oil.nvim, matching the oil.desktop file manager entry.
+# Open a directory in oil.nvim.
 oil() {
     nvim "${1:-.}"
 }
