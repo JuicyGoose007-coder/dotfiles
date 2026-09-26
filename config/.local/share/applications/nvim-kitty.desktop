@@ -1,0 +1,13 @@
+[Desktop Entry]
+Type=Application
+Name=Neovim (kitty)
+GenericName=Text Editor
+Comment=Open text files in Neovim inside a new kitty window
+TryExec=nvim
+Exec=kitty --class nvim -e nvim -- %F
+Icon=nvim
+Terminal=false
+Categories=Utility;TextEditor;
+MimeType=text/plain;text/markdown;text/x-shellscript;application/x-shellscript;
+Keywords=Text;Editor;nvim;vim;
+StartupNotify=false
