@@ -21,7 +21,10 @@ KEYS+='|term_margin|term_margin_gradient|term_palette|term_palette_bright'
 # Same search order limine-entry-tool uses when ESP_PATH is unset.
 esp=""
 for d in /efi /boot /boot/efi /limine; do
-  if sudo test -f "$d/limine.conf"; then esp="$d"; break; fi
+  if sudo test -f "$d/limine.conf"; then
+    esp="$d"
+    break
+  fi
 done
 [[ -n "$esp" ]] || {
   echo "!! No limine.conf found in /efi /boot /boot/efi /limine."
@@ -39,8 +42,14 @@ entries=$(sudo grep -c '^/' "$conf" || true)
 echo ":: Live config: $conf ($entries OS entries -- these are not modified)"
 
 # --- render the theme, before touching anything ----------------------------
-[[ -r "$src/theme.conf" ]] || { echo "!! $src/theme.conf is missing."; exit 1; }
-[[ -r "$src/sushi.jpg"  ]] || { echo "!! $src/sushi.jpg is missing."; exit 1; }
+[[ -r "$src/theme.conf" ]] || {
+  echo "!! $src/theme.conf is missing."
+  exit 1
+}
+[[ -r "$src/sushi.jpg" ]] || {
+  echo "!! $src/sushi.jpg is missing."
+  exit 1
+}
 
 # Arch has no `hostname` binary by default, so ask systemd first.
 host="$(hostnamectl --static 2>/dev/null || true)"
@@ -49,7 +58,7 @@ host="$(hostnamectl --static 2>/dev/null || true)"
 
 tmpdir="$(mktemp -d)"
 trap 'rm -rf "$tmpdir"' EXIT
-sed "s/@HOSTNAME@/$host/g" "$src/theme.conf" > "$tmpdir/theme"
+sed "s/@HOSTNAME@/$host/g" "$src/theme.conf" >"$tmpdir/theme"
 echo ":: Branding the menu as \"$host\""
 
 # --- back up, outside the ESP to save boot-partition space -----------------
@@ -93,7 +102,7 @@ sudo cat "$conf" | awk \
     print end
     printf "%s", rest
   }
-' > "$tmpdir/limine.conf"
+' >"$tmpdir/limine.conf"
 
 # Sanity check before it goes anywhere near the boot partition.
 new_entries=$(grep -c '^/' "$tmpdir/limine.conf")
@@ -112,7 +121,7 @@ echo ":: Wallpaper installed at $esp/limine/sushi.jpg"
 
 # --- re-enroll: with enrollment on, an edited config will not boot ---------
 if sudo grep -rqs '^[[:space:]]*ENABLE_ENROLL_LIMINE_CONFIG=["'\'']\?yes' \
-     /etc/default/limine /etc/limine-entry-tool.conf /etc/limine-entry-tool.d/; then
+  /etc/default/limine /etc/limine-entry-tool.conf /etc/limine-entry-tool.d/; then
   echo ":: Config enrollment is on -- re-enrolling"
   sudo limine-enroll-config
 fi
