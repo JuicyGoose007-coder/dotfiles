@@ -33,7 +33,13 @@ setopt HIST_SAVE_NO_DUPS
 setopt HIST_IGNORE_SPACE
 setopt HIST_VERIFY
 setopt SHARE_HISTORY
+setopt EXTENDED_HISTORY
 setopt HIST_REDUCE_BLANKS
+
+zshaddhistory() {
+  local cmd=${${(z)1}[1]}
+  whence -- "$cmd" >/dev/null || [[ -d ${~cmd} ]] || return 2
+}
 
 # ============================================================================
 # PLUGINS & TOOLS (via Zinit)
