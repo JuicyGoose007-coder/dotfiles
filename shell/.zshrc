@@ -36,9 +36,14 @@ setopt SHARE_HISTORY
 setopt EXTENDED_HISTORY
 setopt HIST_REDUCE_BLANKS
 
+# True if the line's first word is a real command or directory (AUTO_CD)
+_is_real_cmd() {
+  local cmd=${${(zA)1}[1]}  # (A) keeps a one-word line from indexing letters
+  whence -- "$cmd" >/dev/null || [[ -d ${~cmd} ]]
+}
+
 zshaddhistory() {
-  local cmd=${${(z)1}[1]}
-  whence -- "$cmd" >/dev/null || [[ -d ${~cmd} ]] || return 2
+  _is_real_cmd "$1" || return 2
 }
 
 # ============================================================================
@@ -55,7 +60,17 @@ zinit light zdharma-continuum/fast-syntax-highlighting
 export DEJA_ACCEPT_KEY='^E'
 export DEJA_CYCLE_KEY='^N'
 export DEJA_TOGGLE_KEY=''  # leave Ctrl+X free for ^X^K / ^X^L
-zinit ice wait"0" lucid depth=1 pick"deja.plugin.zsh"
+
+# Deja records commands itself and ignores zshaddhistory, so extend its
+# private ignore check to skip typos too. Re-check after deja updates.
+_deja_skip_typos() {
+  (( $+functions[_deja_history_ignored] )) || return
+  functions[_deja_history_ignored_orig]=$functions[_deja_history_ignored]
+  _deja_history_ignored() {
+    _deja_history_ignored_orig "$1" || ! _is_real_cmd "$1"
+  }
+}
+zinit ice wait"0" lucid depth=1 pick"deja.plugin.zsh" atload'_deja_skip_typos'
 zinit light Giammarco-Ferranti/deja
 
 zinit ice wait lucid blockf atpull'zinit creinstall -q .'
