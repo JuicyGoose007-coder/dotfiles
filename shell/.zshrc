@@ -161,7 +161,7 @@ alias bios='systemctl reboot --firmware-setup'
 alias pswd-reset='faillock --user $USER --reset'
 
 # Shell
-alias reload='source ~/dotfiles/shell/.zshrc'
+alias reload='exec zsh'
 
 # Programs
 alias nv='nvim'
