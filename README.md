@@ -3,6 +3,12 @@
 Arch Linux + [niri](https://github.com/YaLTeR/niri) (Wayland), themed Gruvbox
 throughout. Managed with [GNU Stow](https://www.gnu.org/software/stow/).
 
+![Neovim dashboard in kitty](screenshots/desktop.png)
+
+| Neovim + fastfetch                                       | Bare desktop                                |
+| -------------------------------------------------------- | ------------------------------------------- |
+| ![Neovim and fastfetch side by side](screenshots/nvim-fastfetch.png) | ![Wallpaper and bar](screenshots/wallpaper.png) |
+
 ## Fresh install
 
 > [!WARNING]
@@ -74,7 +80,7 @@ homescripts/scripts/     ->  ~/scripts
 | `shell`       | `.zshrc`                               |
 | `homescripts` | `~/scripts` — standalone shell scripts |
 
-`scripts/`, `system/` and `zen/` are **not** stow packages — they are repo tooling, run
+`scripts/`, `system/`, `zen/` and `screenshots/` are **not** stow packages — they are repo tooling, run
 from the repo and never symlinked. `system/` holds the parts that live outside
 `$HOME` and need root. Apply it with `system/restore.sh`, which copies into
 `/etc`, enables the services in `services-enabled.txt`, applies the `IgnorePkg`
