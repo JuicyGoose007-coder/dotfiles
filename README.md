@@ -166,5 +166,6 @@ Captured because a package list alone cannot rebuild these:
 
 ## Not in here
 
-Neovim config — that lives in its own
-repo and is symlinked in from `~/Projects/nvim`.
+Neovim config — that lives in its own repo,
+[minimalish-nvim](https://github.com/JuicyGoose007-coder/minimalish-nvim), and
+is symlinked in from `~/Projects/nvim`.
