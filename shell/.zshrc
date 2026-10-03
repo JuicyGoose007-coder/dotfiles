@@ -205,6 +205,12 @@ alias lg='lazygit'
 alias tn='tmux new-session -A -s'
 alias tk='tmux kill-session -t'
 
+# Herdr
+alias hn='herdr --session'
+alias hl='herdr session list'
+alias hk='herdr session stop'
+alias hdel='herdr session delete'
+
 # ============================================================================
 # FUNCTIONS
 # ============================================================================
