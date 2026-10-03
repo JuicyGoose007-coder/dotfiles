@@ -1,0 +1,99 @@
+onboarding = false
+
+[theme.custom]
+accent = "#ebdbb2"
+panel_bg = "reset"
+sidebar_bg = "reset"
+active_row_bg = "#474240"
+selection_bg = "#514c49"
+surface0 = "#474240"
+surface1 = "#514c49"
+surface_dim = "#1e1e1e"
+overlay0 = "#76706c"
+overlay1 = "#ebdbb2"
+text = "#fbf1c7"
+subtext0 = "#ebdbb2"
+mauve = "#b16286"
+green = "#98971a"
+yellow = "#d79921"
+red = "#cc241d"
+blue = "#458588"
+teal = "#689d6a"
+peach = "#cc7b1d"
+
+# Keys mirror ~/.config/tmux/tmux.conf where herdr has a matching action.
+[keys]
+prefix = "ctrl+a"
+
+# tmux: b = top/bottom split, v = side-by-side split
+split_horizontal = "prefix+b"
+split_vertical = "prefix+v"
+toggle_sidebar = "prefix+shift+b"   # was prefix+b
+
+# tmux: M-K / M-J cycle windows without the prefix
+previous_tab = "alt+shift+k"
+next_tab = "alt+shift+j"
+
+# tmux: r reloads config, d detaches, comma renames the window
+reload_config = "prefix+r"
+resize_mode = "prefix+shift+r"      # was prefix+r
+detach = "prefix+d"
+rename_tab = "prefix+comma"
+
+# tmux: g = git log popup, so goto moves to f
+goto = "prefix+f"
+
+# Jump between agents (unset by default)
+next_agent = "prefix+shift+j"
+previous_agent = "prefix+shift+k"
+
+# tmux: t = popup shell
+[[keys.command]]
+key = "prefix+t"
+type = "popup"
+command = "$SHELL"
+width = "80%"
+height = "80%"
+
+# tmux: g = popup git log
+[[keys.command]]
+key = "prefix+g"
+type = "popup"
+command = "git log --oneline --graph --color=always -30 | less -R"
+width = "80%"
+height = "80%"
+
+# tmux: Ctrl+h/j/k/l without the prefix, passed through to nvim/fzf
+[[keys.command]]
+key = "ctrl+h"
+type = "shell"
+command = "/home/juicygoose007/.config/herdr/navigate.sh left h"
+
+[[keys.command]]
+key = "ctrl+j"
+type = "shell"
+command = "/home/juicygoose007/.config/herdr/navigate.sh down j"
+
+[[keys.command]]
+key = "ctrl+k"
+type = "shell"
+command = "/home/juicygoose007/.config/herdr/navigate.sh up k"
+
+[[keys.command]]
+key = "ctrl+l"
+type = "shell"
+command = "/home/juicygoose007/.config/herdr/navigate.sh right l"
+
+[ui]
+# Agents needing attention first
+agent_panel_sort = "priority"
+
+[ui.toast]
+# In-app toasts, so prefix+o has a notification target to jump to
+delivery = "herdr"
+
+# prefix+a: jump to the agent waiting on you (blocked, then done)
+[[keys.command]]
+key = "prefix+a"
+type = "shell"
+command = "/home/juicygoose007/.config/herdr/top-agent.sh"
