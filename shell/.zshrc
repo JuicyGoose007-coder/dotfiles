@@ -93,6 +93,7 @@ zstyle ':completion::complete:*' use-cache 1
 zstyle ':completion::complete:*' cache-path ~/.zsh/cache
 zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
 zstyle ':completion:*' menu select
+zstyle ':completion:*' insert-tab false  # Tab on an empty line opens fzf-tab
 zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS}
 
 zstyle ':fzf-tab:*' fzf-flags '--color=bg+:#3c3836,bg:#282828,spinner:#8ec07c,hl:#83a598,fg:#d5c4a1,header:#83a598,info:#fabd2f,pointer:#8ec07c,marker:#8ec07c,fg+:#ebdbb2,prompt:#fabd2f,hl+:#83a598'
