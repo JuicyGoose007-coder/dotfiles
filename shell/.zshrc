@@ -173,6 +173,7 @@ alias h='history'
 alias j='jobs'
 alias c='clear'
 alias bios='systemctl reboot --firmware-setup'
+alias fedora='read -q "?Reboot into Fedora? [y/N] " && echo && sudo efibootmgr --bootnext 0002 && systemctl reboot'
 alias pswd-reset='faillock --user $USER --reset'
 
 # Shell
