@@ -5,8 +5,8 @@ throughout. Managed with [GNU Stow](https://www.gnu.org/software/stow/).
 
 ![Neovim dashboard in kitty](screenshots/desktop.png)
 
-| Neovim + fastfetch                                       | Bare desktop                                |
-| -------------------------------------------------------- | ------------------------------------------- |
+| Neovim + fastfetch                                                   | Bare desktop                                    |
+| -------------------------------------------------------------------- | ----------------------------------------------- |
 | ![Neovim and fastfetch side by side](screenshots/nvim-fastfetch.png) | ![Wallpaper and bar](screenshots/wallpaper.png) |
 
 ## Fresh install
@@ -26,6 +26,8 @@ throughout. Managed with [GNU Stow](https://www.gnu.org/software/stow/).
 > - `install.sh` turns on the `multilib` repo, which `steam` needs.
 > - `bootstrap.sh` creates `~/.config`, `~/.local/share` and `~/Pictures`
 >   before stowing, so stow cannot link them wholesale into the repo.
+> - `install.sh` installs `deja` (not packaged) into `~/.local/bin` with its
+>   own installer.
 >
 > Remove this note once a fresh install has gone through cleanly.
 
@@ -65,20 +67,25 @@ git -C ~/dotfiles remote set-url origin git@github.com:JuicyGoose007-coder/dotfi
 
 ## Layout
 
-`config`, `shell` and `homescripts` are **stow packages**. Inside each, the
-path is rebuilt as `$HOME` sees it:
+`config`, `shell`, `homescripts` and `homepictures` are **stow packages**.
+Inside each, the path is rebuilt as `$HOME` sees it:
 
 ```
-config/.config/niri/     ->  ~/.config/niri
-shell/.zshrc             ->  ~/.zshrc
-homescripts/scripts/     ->  ~/scripts
+config/.config/niri/                ->  ~/.config/niri
+shell/.zshrc                        ->  ~/.zshrc
+homescripts/scripts/                ->  ~/scripts
+homepictures/Pictures/wallpapers/   ->  ~/Pictures/wallpapers
 ```
 
-| Package       | What it holds                          |
-| ------------- | -------------------------------------- |
-| `config`      | everything under `~/.config`           |
-| `shell`       | `.zshrc`                               |
-| `homescripts` | `~/scripts` — standalone shell scripts |
+| Package        | What it holds                                                   |
+| -------------- | --------------------------------------------------------------- |
+| `config`       | everything under `~/.config`                                    |
+| `shell`        | `.zshrc`                                                        |
+| `homescripts`  | `~/scripts` — standalone shell scripts, plus `bash-template.sh` |
+| `homepictures` | `~/Pictures/wallpapers` — Gruvbox wallpapers                    |
+
+New scripts start from `homescripts/scripts/bash-template.sh`, so they share
+its `JuicyGoose007` header and `End of Script` closing.
 
 `scripts/`, `system/`, `zen/` and `screenshots/` are **not** stow packages — they are repo tooling, run
 from the repo and never symlinked. `system/` holds the parts that live outside
@@ -113,18 +120,24 @@ Add `--simulate --verbose=2` to preview without touching anything. Add
 - **scripts/packages** (repo tooling, not stowed) — `pkglist.txt` (93
   packages, repo and AUR together), `hardware.txt` for the drivers and boot
   tooling that depend on the machine,
-  with `install.sh` (bootstraps `paru` from source, then installs everything in
-  one pass), `pins.txt` for packages held at a known-good version, and
-  `update-lists.sh` to regenerate the list
+  with `install.sh` (bootstraps `paru` from source, installs the list in one
+  pass, rolls pinned packages back, then installs `deja`), `pins.txt` for
+  packages held at a known-good version, and `update-lists.sh` to regenerate
+  the list
+- **paru** — `paru.conf` for the AUR helper
 - **starship, kitty, ghostty, tmux, superfile, lazygit, fastfetch, fuzzel** —
   prompt, terminals, multiplexer, file manager, launcher
+- **herdr** — terminal multiplexer for coding agents. Keys mirror
+  `tmux.conf`. `navigate.sh` gives Ctrl+h/j/k/l pane movement that still
+  reaches nvim and fzf, and `top-agent.sh` (prefix+a) jumps to the agent
+  waiting on you.
 - **gtk-3.0 / gtk-4.0 / qt5ct / qt6ct** — toolkit theming
 - **mimeapps.list, user-dirs.dirs, xdg-terminals.list** — default apps and
-  XDG paths
-- **zen** (repo tooling, not stowed) — Zen Browser settings: `user.js`, CSS,
-  mods and their settings, keyboard shortcuts, containers. Zen names its
-  profile folder at random, so `zen/zen.sh` finds it and copies files in or
-  out. Run `zen/zen.sh save` after changing settings in Zen. On a new machine,
+  XDG paths. Firefox is the default browser.
+- **zen** (repo tooling, not stowed) — kept as a backup browser. Zen Browser
+  settings: `user.js`, CSS, mods and their settings, keyboard shortcuts,
+  containers. Zen names its profile folder at random, so `zen/zen.sh` finds it
+  and copies files in or out. Run `zen/zen.sh save` after changing settings in Zen. On a new machine,
   start Zen once, quit it, then run `zen/zen.sh restore`. Bookmarks,
   passwords, history and extensions come back through Zen Sync instead.
 
@@ -135,6 +148,8 @@ Captured because a package list alone cannot rebuild these:
 - `etc/greetd/config.toml` + `etc/pam.d/greetd` — the login screen, pointed at
   `noctalia-greeter-session`. Stock greetd would not launch it.
 - `etc/systemd/zram-generator.conf` — zstd-compressed zram swap.
+- `etc/sysctl.d/99-swappiness.conf` — `vm.swappiness = 180`, so the kernel
+  prefers zram over dropping file cache.
 - `etc/vconsole.conf`, `etc/locale.conf`. Not `etc/hostname` — each machine
   keeps the name it got at install.
 - `services-enabled.txt` — `greetd`, `NetworkManager`, `fstrim.timer` and the
@@ -151,7 +166,5 @@ Captured because a package list alone cannot rebuild these:
 
 ## Not in here
 
-Browser personal data (logins, cookies, history, bookmarks — Zen Sync covers
-those), the Discord profile, `~/.config/gh` (holds a live auth token), binary
-databases (`dconf`, `pulse`), and the Neovim config — that lives in its own
+Neovim config — that lives in its own
 repo and is symlinked in from `~/Projects/nvim`.
