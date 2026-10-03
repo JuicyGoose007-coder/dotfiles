@@ -1,4 +1,7 @@
 #!/usr/bin/env bash
+#################
+# JuicyGoose007 #
+#################
 # Reinstall every package this system had, on a fresh Arch install.
 # Regenerate the list with ./update-lists.sh
 set -euo pipefail
@@ -70,3 +73,7 @@ if ! command -v deja >/dev/null 2>&1 && [[ ! -x "$HOME/.local/bin/deja" ]]; then
 fi
 
 echo ":: Done."
+
+#################
+# End of Script #
+#################

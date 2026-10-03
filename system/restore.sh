@@ -1,4 +1,7 @@
 #!/usr/bin/env bash
+#################
+# JuicyGoose007 #
+#################
 # Restore system config outside $HOME: /etc, services, boot image.
 # Run after install.sh. WARNING: overwrites files in /etc.
 set -euo pipefail
@@ -111,3 +114,7 @@ echo ":: Done. Reboot."
 if [[ -n "$backup" ]]; then
   echo "   /etc backup, if you need to undo this: $backup"
 fi
+
+#################
+# End of Script #
+#################

@@ -1,4 +1,7 @@
 #!/usr/bin/env bash
+#################
+# JuicyGoose007 #
+#################
 # Set up a fresh Arch machine: packages, stow symlinks, login shell.
 # Assumes a base Arch install with sudo and network.
 # Does NOT touch /etc -- run system/restore.sh for that.
@@ -36,3 +39,7 @@ cat <<EOF
    Zen Browser settings -- start Zen once, quit it, then:
      $src/zen/zen.sh restore
 EOF
+
+#################
+# End of Script #
+#################

@@ -1,4 +1,7 @@
 #!/usr/bin/env bash
+#################
+# JuicyGoose007 #
+#################
 # Refresh pkglist.txt from what is installed right now.
 # The committed list is hand-trimmed; a raw snapshot adds the junk back
 # (unused Nerd Fonts, *-debug packages). Review the diff afterwards.
@@ -13,3 +16,7 @@ pacman -Qqe | grep -vxF -f <(awk '!/^#/{for (i = 2; i <= NF; i++) print $i}' "$s
   > "$src/pkglist.txt"
 echo "packages: $(wc -l < "$src/pkglist.txt")"
 echo "Review with: git -C ~/dotfiles diff"
+
+#################
+# End of Script #
+#################

@@ -1,4 +1,7 @@
 #!/bin/bash
+#################
+# JuicyGoose007 #
+#################
 # Add the shared Games drive to /etc/fstab.
 # nofail: a missing drive must not drop the boot to an emergency shell.
 set -euo pipefail
@@ -19,3 +22,7 @@ fi
 
 echo "$line" | sudo tee -a /etc/fstab >/dev/null
 echo "Added: $line"
+
+#################
+# End of Script #
+#################
