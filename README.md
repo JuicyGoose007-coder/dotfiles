@@ -43,9 +43,9 @@ noctalia msg greeter-sync
 ```
 
 Reboot rather than just logging out: `restore.sh` rebuilds the boot image and
-enables `greetd`. It also matters for the pinned `xwayland-satellite`: niri
-starts that bridge once per session, so a version change only takes effect
-after the session restarts.
+enables `greetd`. It also matters for `xwayland-satellite`: niri starts that
+bridge once per session, so a version change only takes effect after the
+session restarts.
 
 Once you have added an SSH key to GitHub, switch the remotes over so you can
 push:

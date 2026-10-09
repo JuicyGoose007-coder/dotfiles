@@ -1,10 +1,11 @@
 # niri setup notes
 
-## xwayland-satellite is PINNED to 0.8.1 — do not upgrade blindly
+## xwayland-satellite was pinned to 0.8.1 (un-pinned 2026-10-09)
 
-**Date:** 2026-09-01
+**Date:** 2026-09-01. **Resolved:** 0.8.3 fixed it; the pin was removed from
+`pins.txt`. Kept here in case the symptom comes back.
 
-**Symptom if this pin is lost:** Steam's menu-bar popups (Steam / View / Friends /
+**Symptom:** Steam's menu-bar popups (Steam / View / Friends /
 Games / Help) appear for one frame and vanish. Steam only; native Wayland apps are
 fine.
 
@@ -12,7 +13,8 @@ fine.
 override-redirect popups. Steam draws those menus with its CEF web UI, so they go
 through this bridge.
 
-**Fix:** stay on 0.8.1-2, pinned via `IgnorePkg` in `/etc/pacman.conf`.
+**Fix at the time:** stay on 0.8.1-2, pinned via `IgnorePkg` in `/etc/pacman.conf`.
+To pin again, add `xwayland-satellite 0.8.1-2` to `scripts/packages/pins.txt`.
 
 **Upstream:**
 - https://github.com/Supreeeme/xwayland-satellite/issues/468 (open — 0.8.2 broke
