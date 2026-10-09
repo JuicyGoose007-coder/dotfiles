@@ -159,6 +159,8 @@ Captured because a package list alone cannot rebuild these:
 
 - `etc/greetd/config.toml` + `etc/pam.d/greetd` — the login screen, pointed at
   `noctalia-greeter-session`. Stock greetd would not launch it.
+- `var/lib/noctalia-greeter/greeter.toml` — login screen on `DP-2` only, no
+  Noctalia logo. `greeter-sync` never writes this file, so it is tracked here.
 - `etc/systemd/zram-generator.conf` — zstd-compressed zram swap.
 - `etc/sysctl.d/99-swappiness.conf` — `vm.swappiness = 180`, so the kernel
   prefers zram over dropping file cache.

@@ -27,6 +27,12 @@ fi
 echo ":: Copying /etc files"
 sudo cp -av "$src/etc/." /etc/
 
+# Login screen settings: one monitor, no logo. The greeter runs as its own
+# user and only reads this folder; Sync in Noctalia never writes this file.
+echo ":: Copying greeter.toml"
+sudo install -Dv -m 644 -o greeter -g greeter \
+  "$src/var/lib/noctalia-greeter/greeter.toml" /var/lib/noctalia-greeter/greeter.toml
+
 # Add every name in pins.txt to IgnorePkg. pacman.conf is edited in place
 # rather than copied in, so the rest of it stays stock.
 while read -r pin _; do
