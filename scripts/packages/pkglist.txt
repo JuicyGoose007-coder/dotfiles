@@ -4,7 +4,6 @@ base
 base-devel
 bash-language-server
 bat
-btrfs-progs
 claude-code
 cliphist
 ddcutil
