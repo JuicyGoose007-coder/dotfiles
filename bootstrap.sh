@@ -39,6 +39,9 @@ cat <<EOF
 
    Then reboot.
 
+   Login screen look -- log in, then:
+     noctalia msg greeter-sync
+
    Zen Browser settings -- start Zen once, quit it, then:
      $src/zen/zen.sh restore
 EOF

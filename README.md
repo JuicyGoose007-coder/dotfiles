@@ -51,6 +51,11 @@ git clone https://github.com/JuicyGoose007-coder/dotfiles.git ~/dotfiles
 
 reboot
 
+# Login screen look. The greeter keeps its own copy of the wallpaper and
+# colors in /var/lib/noctalia-greeter. Log in first so Noctalia is running;
+# asks for your password.
+noctalia msg greeter-sync
+
 # Zen Browser settings. Start Zen once and quit it first, so it creates
 # its profile folder.
 ~/dotfiles/zen/zen.sh restore
