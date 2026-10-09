@@ -99,6 +99,10 @@ if command -v limine-mkinitcpio >/dev/null 2>&1; then
     exit 1
   fi
   echo ":: Boot files OK: ${#kdirs[@]} kernel(s) under /boot/$mid, $entries entries in limine.conf"
+
+  # The boot menu theme. Cosmetic, so a failure here does not stop the restore.
+  "$src/../config/.config/limine/install.sh" ||
+    echo "!! Limine theme not applied. Re-run config/.config/limine/install.sh"
 else
   # The machine's own presets decide where the images go.
   echo ":: Rebuilding initramfs via mkinitcpio -P"

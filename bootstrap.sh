@@ -20,6 +20,9 @@ echo ":: Linking configs into \$HOME"
 mkdir -p "$HOME/.config" "$HOME/.local/share" "$HOME/Pictures"
 stow --dir="$src" --target="$HOME" --restow config shell homescripts homepictures
 
+echo ":: Restoring Noctalia settings"
+"$src/noctalia/noctalia.sh" restore || echo "!! Skipped. Run $src/noctalia/noctalia.sh restore later."
+
 if [[ "$SHELL" != *zsh ]]; then
   echo ":: Making zsh the login shell"
   chsh -s /usr/bin/zsh
