@@ -14,7 +14,3 @@
 [appearance]
 # Hide the Noctalia brand logo on the login screen.
 hide_logo = true
-
-[output]
-# Show the greeter only on this connector; all other outputs stay off.
-name = "DP-2"

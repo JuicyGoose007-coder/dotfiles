@@ -27,8 +27,9 @@ fi
 echo ":: Copying /etc files"
 sudo cp -av "$src/etc/." /etc/
 
-# Login screen settings: one monitor, no logo. The greeter runs as its own
-# user and only reads this folder; Sync in Noctalia never writes this file.
+# Login screen settings. The greeter runs as its own user and only reads this
+# folder; Sync in Noctalia never writes this file. Monitor choice is per PC:
+# main-pc.sh adds it on the main PC.
 echo ":: Copying greeter.toml"
 sudo install -Dv -m 644 -o greeter -g greeter \
   "$src/var/lib/noctalia-greeter/greeter.toml" /var/lib/noctalia-greeter/greeter.toml

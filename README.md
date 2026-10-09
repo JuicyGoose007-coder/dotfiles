@@ -49,6 +49,10 @@ git clone https://github.com/JuicyGoose007-coder/dotfiles.git ~/dotfiles
 # /etc, services and the boot image. Needs root, prompts before overwriting.
 ~/dotfiles/system/restore.sh
 
+# MAIN PC ONLY -- skip on any other machine. Games drive in fstab, login
+# screen on DP-2. Re-run after any later restore.sh.
+~/dotfiles/system/main-pc.sh
+
 reboot
 
 # Login screen look. The greeter keeps its own copy of the wallpaper and
@@ -159,8 +163,11 @@ Captured because a package list alone cannot rebuild these:
 
 - `etc/greetd/config.toml` + `etc/pam.d/greetd` — the login screen, pointed at
   `noctalia-greeter-session`. Stock greetd would not launch it.
-- `var/lib/noctalia-greeter/greeter.toml` — login screen on `DP-2` only, no
-  Noctalia logo. `greeter-sync` never writes this file, so it is tracked here.
+- `var/lib/noctalia-greeter/greeter.toml` — hides the Noctalia logo on the
+  login screen. `greeter-sync` never writes this file, so it is tracked here.
+- `main-pc.sh` — **main PC only.** Settings tied to this PC's hardware: adds
+  the Games drive to fstab (`homescripts/scripts/fstab.sh`) and limits the
+  login screen to `DP-2`. `restore.sh` stays generic and never runs it.
 - `etc/systemd/zram-generator.conf` — zstd-compressed zram swap.
 - `etc/sysctl.d/99-swappiness.conf` — `vm.swappiness = 180`, so the kernel
   prefers zram over dropping file cache.
