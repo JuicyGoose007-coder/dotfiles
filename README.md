@@ -11,29 +11,6 @@ throughout. Managed with [GNU Stow](https://www.gnu.org/software/stow/).
 
 ## Fresh install
 
-> [!WARNING]
-> **Untested on a second machine.** The setup was reworked (Sep 25, 2026) to
-> work on any Arch PC, under any username and hostname. Nothing here has run
-> on a fresh install yet, so expect rough edges. What changed:
->
-> - `install.sh` picks CPU microcode, GPU drivers, and the Limine and snapper
->   packages from `scripts/packages/hardware.txt`, based on the hardware,
->   bootloader and root filesystem it finds. They are no longer hard-coded.
-> - `fuzzel.ini`, `zen.sh restore` and `fstab.sh` no longer assume the
->   `juicygoose007` username.
-> - `/etc/hostname`, `/etc/mkinitcpio.conf` and `linux.preset` are no longer
->   tracked or restored. Each machine keeps its own boot image setup.
-> - `install.sh` turns on the `multilib` repo, which `steam` needs.
-> - `bootstrap.sh` creates `~/.config`, `~/.local/share` and `~/Pictures`
->   before stowing, so stow cannot link them wholesale into the repo.
-> - `install.sh` installs `deja` (not packaged) into `~/.local/bin` with its
->   own installer.
-> - First reinstall (Oct 2026) found three gaps, now fixed: `appstream` was
->   missing (ProtonPlus broke), `bootstrap.sh` now restores Noctalia's GUI
->   settings, and `restore.sh` now applies the Limine theme.
->
-> Remove this note once a fresh install has gone through cleanly.
-
 Start from a working base Arch install with a network connection and your user
 account with `sudo`. Then, top to bottom:
 
