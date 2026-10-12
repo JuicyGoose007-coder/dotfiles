@@ -96,7 +96,7 @@ zstyle ':completion:*' menu select
 zstyle ':completion:*' insert-tab false  # Tab on an empty line opens fzf-tab
 zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS}
 
-zstyle ':fzf-tab:*' fzf-flags '--color=bg+:#3c3836,bg:#282828,spinner:#8ec07c,hl:#83a598,fg:#d5c4a1,header:#83a598,info:#fabd2f,pointer:#8ec07c,marker:#8ec07c,fg+:#ebdbb2,prompt:#fabd2f,hl+:#83a598'
+# zstyle ':fzf-tab:*' fzf-flags '--color=bg+:#3c3836,bg:#282828,spinner:#8ec07c,hl:#83a598,fg:#d5c4a1,header:#83a598,info:#fabd2f,pointer:#8ec07c,marker:#8ec07c,fg+:#ebdbb2,prompt:#fabd2f,hl+:#83a598'
 
 # ============================================================================
 # FZF CONFIGURATION
@@ -104,7 +104,14 @@ zstyle ':fzf-tab:*' fzf-flags '--color=bg+:#3c3836,bg:#282828,spinner:#8ec07c,hl
 
 if command -v fzf >/dev/null 2>&1; then
     # Gruvbox dark
-    export FZF_DEFAULT_OPTS="--color=bg+:#3c3836,bg:#282828,spinner:#8ec07c,hl:#83a598,fg:#d5c4a1,header:#83a598,info:#fabd2f,pointer:#8ec07c,marker:#8ec07c,fg+:#ebdbb2,prompt:#fabd2f,hl+:#83a598"
+    # FZF_THEME="--color=bg+:#3c3836,bg:#282828,spinner:#8ec07c,hl:#83a598,fg:#d5c4a1,header:#83a598,info:#fabd2f,pointer:#8ec07c,marker:#8ec07c,fg+:#ebdbb2,prompt:#fabd2f,hl+:#83a598"
+    # export FZF_DEFAULT_OPTS="$FZF_THEME"
+    # export FM_FZF_COLORS="$FZF_THEME"
+
+    # Noctalia (regenerated from the wallpaper)
+    [[ -r ~/.config/fzf/themes/noctalia.sh ]] && source ~/.config/fzf/themes/noctalia.sh
+    export FM_FZF_COLORS="$fzf_theme_opts"
+    zstyle ':fzf-tab:*' use-fzf-default-opts yes
 
     # Carbon (alternative theme)
     # export FZF_DEFAULT_OPTS="--color=bg+:#262626,bg:#161616,spinner:#be95ff,hl:#33b1ff,fg:#f2f4f8,header:#33b1ff,info:#be95ff,pointer:#ff7eb6,marker:#3ddbd9,fg+:#f2f4f8,prompt:#be95ff,hl+:#ff7eb6"
@@ -148,7 +155,7 @@ alias update='paru -Syu'
 alias pac-upd='sudo pacman -Syu'
 
 # Install/Remove
-alias pi='paru -S '
+# alias pi='paru -S '
 alias pac-install='sudo pacman -S '
 alias remove='sudo pacman -Rs '
 alias remove-all='sudo pacman -Rns '
@@ -279,13 +286,13 @@ function zvm_after_select_vi_mode {
   esac
 }
 
-if [[ -o interactive ]]; then
-    if [[ -z "$TMUX" ]]; then
-        fastfetch
-    elif [[ "$(tmux display -p '#{pane_index}')" == "$(tmux show -gv pane-base-index)" ]]; then
-        fastfetch
-    fi
-fi
+# if [[ -o interactive ]]; then
+#     if [[ -z "$TMUX" ]]; then
+#         fastfetch
+#     elif [[ "$(tmux display -p '#{pane_index}')" == "$(tmux show -gv pane-base-index)" ]]; then
+#         fastfetch
+#     fi
+# fi
 
 # if [[ ! -f /dev/shm/fastfetch_launched ]]; then
 #     fastfetch
@@ -312,5 +319,5 @@ eval "$(starship init zsh)"
      fi
  fi
 
-export BAT_THEME="gruvbox-dark"
+# export BAT_THEME="gruvbox-dark"
 

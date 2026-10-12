@@ -11,3 +11,11 @@ tint_intensity = 0.3
 
 [widget.clock]
 format = "{:%-I:%M %p}"
+
+# Mango window colors, matching niri. Use this instead of the built-in Mango
+# template: that one creates ~/.config/mango/config.conf, which mango 0.18
+# loads in place of config.toml. mmsg fails harmlessly under niri.
+[theme.templates.user.mango]
+input_path = "/home/juicygoose007/.config/noctalia/templates/mango-colors.toml"
+output_path = "/home/juicygoose007/.config/mango/noctalia-colors.toml"
+post_hook = "mmsg dispatch reload_config || true"

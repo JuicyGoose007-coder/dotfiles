@@ -11,21 +11,21 @@
       "right": 3
     },
     "color": {
-      "1": "#ebdb63",
-      "2": "#8ec063"
+      "1": "#6396e4",
+      "2": "#6b5cd6"
     }
   },
   "display": {
     "separator": " ",
     "color": {
-      "keys": "#ebdbb2",
-      "title": "#8ec07c"
+      "keys": "#6796e4",
+      "title": "#6b5cd6"
     },
     "percent": {
       "color": {
-        "green": "#83a598",
-        "yellow": "#e9d196",
-        "red": "#fb4934"
+        "green": "#a666cc",
+        "yellow": "#93b4ec",
+        "red": "#fd4663"
       }
     }
   },
