@@ -5,11 +5,20 @@ Noctalia from the wallpaper. tmux and the boot menu keep fixed palettes
 (Gruvbox or muted-blue) that swap with one change. Managed with
 [GNU Stow](https://www.gnu.org/software/stow/).
 
+![Neovim dashboard in kitty, muted-blue](screenshots/muted-blue-desktop.png)
+
+![Neovim and fastfetch, muted-blue](screenshots/muted-blue-nvim-fastfetch.png)
+
+<details>
+<summary>Gruvbox</summary>
+
 ![Neovim dashboard in kitty](screenshots/desktop.png)
 
 | Neovim + fastfetch                                                   | Bare desktop                                    |
 | -------------------------------------------------------------------- | ----------------------------------------------- |
 | ![Neovim and fastfetch side by side](screenshots/nvim-fastfetch.png) | ![Wallpaper and bar](screenshots/wallpaper.png) |
+
+</details>
 
 ## Fresh install
 
