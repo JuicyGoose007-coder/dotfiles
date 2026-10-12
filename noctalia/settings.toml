@@ -33,7 +33,7 @@ address = "Honea Path, South Carolina"
 monitors = [ "DP-2" ]
 transition = [ "disc", "fade", "honeycomb", "stripes", "wipe", "zoom" ]
 transition_duration = 300
-wallpaper = "/home/juicygoose007/Pictures/wallpapers/mustacho.png"
+wallpaper = "/home/juicygoose007/Pictures/wallpapers/mustacho-muted-blue-2.png"
 
 [lockscreen_widgets]
 enabled = true
@@ -137,7 +137,7 @@ time_format = "{:%I:%M %p}"
 builtin = "Gruvbox"
 community_palette = "GruvboxAlt"
 mode = "dark"
-source = "community"
+source = "wallpaper"
 wallpaper_scheme = "faithful"
 
     [theme.templates]
@@ -150,6 +150,7 @@ wallpaper_scheme = "faithful"
         "zen-browser",
         "obsidian",
         "steam",
+        "fuzzel",
         "fastfetch",
         "zellij",
         "bat",
@@ -165,16 +166,16 @@ directory_dark = "/home/juicygoose007/Pictures/wallpapers"
 directory_light = "/home/juicygoose007/Pictures/wallpapers"
 
     [wallpaper.default]
-    path = "/home/juicygoose007/Pictures/wallpapers/rubiks-cube.png"
+    path = "/home/juicygoose007/Pictures/wallpapers/rubiks-cube-muted-blue-2.png"
 
     [wallpaper.last]
-    path = "/home/juicygoose007/Pictures/wallpapers/rubiks-cube.png"
+    path = "/home/juicygoose007/Pictures/wallpapers/rubiks-cube-muted-blue-2.png"
 
     [wallpaper.monitors.DP-1]
-    path = "/home/juicygoose007/Pictures/wallpapers/rubiks-cube.png"
+    path = "/home/juicygoose007/Pictures/wallpapers/rubiks-cube-muted-blue-2.png"
 
     [wallpaper.monitors.DP-2]
-    path = "/home/juicygoose007/Pictures/wallpapers/rubiks-cube.png"
+    path = "/home/juicygoose007/Pictures/wallpapers/rubiks-cube-muted-blue-2.png"
 
 [weather]
 unit = "imperial"
@@ -182,6 +183,7 @@ unit = "imperial"
 [widget.workspaces]
 empty_color = "primary"
 focused_color = "secondary"
+hide_when_empty = true
 label_source = "name"
 max_label_chars = 10
 occupied_color = "primary"
