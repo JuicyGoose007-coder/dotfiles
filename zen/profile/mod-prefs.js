@@ -60,4 +60,6 @@ user_pref("uc.essentials.gap", "Normal");
 user_pref("uc.essentials.transition-speed", "100ms");
 user_pref("uc.essentials.width", "Normal");
 user_pref("uc.pins.transition-speed", "100ms");
+user_pref("zen.sitegroups.icon-colors-v2", "{\"youtube.com\":\"#ff0033\",\"reddit.com\":\"#ff4500\"}");
+user_pref("zen.sitegroups.sections", "[{\"kind\":\"site\",\"name\":\"YouTube\",\"sites\":[\"youtube.com\"],\"color\":null},{\"kind\":\"site\",\"name\":\"Reddit\",\"sites\":[\"reddit.com\"],\"color\":null},{\"kind\":\"site\",\"name\":\"Wikipedia\",\"sites\":[\"wikipedia.org\"],\"color\":null},{\"kind\":\"site\",\"name\":\"X\",\"sites\":[\"x.com\",\"twitter.com\"],\"color\":null}]");
 user_pref("zen.workspaces.show-workspace-indicator", true);
