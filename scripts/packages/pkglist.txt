@@ -87,6 +87,7 @@ xdg-desktop-portal-gnome
 xdg-utils
 xorg-xwayland
 xwayland-satellite
+yazi
 zen-browser-bin
 zoxide
 zram-generator

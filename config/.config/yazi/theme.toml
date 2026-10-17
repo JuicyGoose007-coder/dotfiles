@@ -1,0 +1,9 @@
+# Colours live in flavors/<name>.yazi (kept in sync with kitty/themes/).
+# Swap the active pair to change theme.
+[flavor]
+dark = "muted-water"
+light = "muted-water"
+# dark = "noctalia"
+# light = "noctalia"
+# dark = "gruvbox"
+# light = "gruvbox"
