@@ -1,0 +1,302 @@
+/* ==== Tab groups ==== */
+/* https://github.com/Anoms12/Advanced-Tab-Groups */
+/* ====== v3.4.0s ====== */
+/* Zen-folder look for group headers (browser.tabs.groups.folder-look) */
+@import url("folder-look.css");
+
+tab-group:not([split-view-group]) {
+    --tab-group-stroke: light-dark(
+    color-mix(in srgb, var(--zen-primary-color) 60%, black),
+    color-mix(in srgb, var(--zen-colors-primary) 20%, var(--toolbox-textcolor)));
+  
+    @media not (-moz-pref("browser.tabs.groups.arc-style")) {
+      &[show-grain="true"] .grain {
+        display: flex;
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        background-image: url(chrome://browser/content/zen-images/grain-bg.png);
+        pointer-events: none;
+        z-index: 1;
+        opacity: var(--group-grain, 0);
+        mix-blend-mode: overlay;
+        border-radius: 4px;
+      }
+    }
+
+  .tab-group-label-container {
+    height: 36px !important;
+    margin: 0 !important;
+    padding: 0 10px 0 0 !important;
+    border-radius: var(--border-radius-medium) !important;
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: center !important;
+    justify-content: flex-start !important;
+
+    .tab-close-button {
+      display: none !important;
+    }
+    .tab-group-folder-button {
+      display: none !important;
+      list-style-image: url("chrome://browser/skin/zen-icons/folder.svg") !important;
+      -moz-context-properties: fill, fill-opacity !important;
+      fill: currentColor !important;
+      width: 20px !important;
+      height: 20px !important;
+      padding: 4px !important;
+      border-radius: var(--tab-border-radius, var(--border-radius-small, 4px)) !important;
+      margin-inline: 0 2px !important;
+      -moz-window-dragging: no-drag !important;
+    }
+    .tab-group-folder-button:hover {
+      background-color: color-mix(in srgb, currentColor 12%, transparent) !important;
+    }
+
+    &:hover {
+      background-color: var(--tab-hover-background-color) !important;
+      .tab-close-button {
+        -moz-window-dragging: no-drag !important;
+        visibility: visible !important;
+        display: flex !important;
+      }
+    }
+
+    .tab-group-icon-container {
+      margin: 0 6px 0 10px;
+      color: var(--tab-group-stroke);
+    }
+
+    .tab-group-icon {
+      list-style-image: none !important;
+      display: flex !important;
+      justify-content: center !important;
+      align-items: center !important;
+      width: 16px;
+      height: 16px;
+      border-radius: 4px;
+      position: relative;
+      fill: var(--tab-group-stroke) !important;
+      background: var(--tab-group-color);
+
+      &[zen-emoji-open='true']::before {
+        border: 1px dashed light-dark(rgba(0, 0, 0, .5), rgba(255, 255, 255, .5));
+        border-radius: 6px;
+        content: '';
+        position: absolute;
+        pointer-events: none;
+      }
+
+      .group-icon {
+        display: block;
+        width: 12px;
+        height: 12px;
+        fill: white;
+        @media (-moz-pref("browser.tabs.groups.arc-style")) {
+          width: 16px;
+          height: 16px;
+        }
+      }
+
+      & label {
+        transform: translate(0, -1px);
+      }
+    }
+
+    .tab-group-label {
+      direction: ltr;
+      mask-image: linear-gradient(to left, transparent, black 1em);
+      margin-right: auto !important;
+      width: 100%;
+      height: 100% !important;
+      padding: 0 4px 0 4px !important;
+      background: transparent !important;
+      @media (-moz-pref("browser.tabs.groups.arc-style")) {
+      color: color-mix(in srgb, currentColor 70%, transparent) !important;
+      }
+      
+
+      &:-moz-window-inactive {
+        @media (-moz-pref("browser.tabs.groups.arc-style")) {
+          color: color-mix(in srgb, currentColor 70%, transparent) !important;
+        }
+      }
+
+      font-weight: 400 !important;
+      text-align: start !important;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      gap: 5px;
+      .tab-group-label {
+        color: var(--toolbox-textcolor) !important;
+      }
+    }
+  }
+
+  .tab-group-container {
+    max-height: 100% !important;
+    position: relative;
+    margin-inline-start: 12px !important;
+
+    .grain, &::after {
+      position: absolute;
+      left: -2px !important;
+      top: 0;
+      height: 100%;
+      width: 2px;
+      pointer-events: none !important;
+    }
+
+    &::after {
+      content: "";
+      background: var(--tab-group-color);
+    }
+
+    tab {
+      max-height: 40px;
+      opacity: 1;
+      overflow: hidden;
+      transition: scale 0.07s ease, var(--zen-tabbox-element-indent-transition), min-width 100ms ease-out, max-width 100ms ease-out, max-height 0.15s ease, opacity 0.15s ease !important;
+    }
+
+    > tab-group:not([split-view-group]) {
+      margin-block: 2px 0 !important;
+    }
+  }
+
+  &[collapsed] {
+    .tab-group-container {
+      tab:not([selected]),
+      > tab-group:not(:has(tab[selected])) {
+        max-height: 0 !important;
+        min-height: 0 !important;
+        opacity: 0 !important;
+        margin-block: 0 !important;
+        pointer-events: none !important;
+        overflow: hidden !important;
+      }
+      tab[aria-hidden="true"]:not([selected]) {
+        display: flex !important;
+        max-height: 0 !important;
+        min-height: 0 !important;
+        opacity: 0 !important;
+        margin-block: 0 !important;
+        pointer-events: none !important;
+        overflow: hidden !important;
+      }
+    }
+  }
+  &[collapsed] tab[aria-hidden="true"]:not([selected]) {
+    display: flex !important;
+    max-height: 0 !important;
+    min-height: 0 !important;
+    opacity: 0 !important;
+    margin-block: 0 !important;
+    pointer-events: none !important;
+    overflow: hidden !important;
+    transition: max-height 0.15s ease, opacity 0.15s ease, margin 0.15s ease !important;
+  }
+}
+
+/* Arc-like group styling */
+@media (-moz-pref("browser.tabs.groups.arc-style")) {
+  /* Hide the color context menu options */
+  #advanced-tab-groups-context-menu {
+    .change-group-color {
+      display: none !important;
+    }
+  }
+  
+  tab-group:not([split-view-group]) {
+    .tab-group-label-container {
+      height: 30px !important;
+      margin-block-start: 5px !important;
+      &:hover {
+        background-color: transparent !important;
+      }
+      
+      .tab-group-icon-container {
+        margin: 0 0 0 10px !important;
+        display: none !important;
+
+        .tab-group-icon {
+          background: none !important;
+        }
+
+        &:has(label, .group-icon) {
+          display: flex !important;
+        }
+      
+        &:has(.tab-group-icon[zen-emoji-open='true']) {
+          display: flex !important;
+        }
+        
+        & .group-icon {
+          width: 14px !important;
+          height: 14px !important;
+          fill: color-mix(in srgb, currentColor 70%, transparent) !important;
+        }
+      }
+
+      .tab-group-label {
+        font-weight: 600 !important;
+        padding-inline: 0 var(--space-medium) !important;
+        margin-left: 10px !important;
+
+        #tabbrowser-tabs[orient="vertical"] & {
+          #tabbrowser-tabs[expanded] & {
+            margin-inline-end: var(--space-medium);
+          }
+        }
+      }
+
+      .tab-close-button {
+        display: none !important;
+      }
+
+      @media (-moz-pref("browser.tabs.groups.show-folder-button")) {
+        &:hover .tab-group-folder-button {
+          display: flex !important;
+          visibility: visible !important;
+          width: 20px !important;
+          height: 20px !important;
+          padding: 4px !important;
+        }
+      }
+    }
+
+    .tab-group-container {
+      margin-inline-start: 5px !important;
+      &::after {
+        content: none;
+      }
+      tab,
+      > tab-group {
+        transition: none !important;
+      }
+    }
+
+    &[collapsed] {
+      .tab-group-container {
+        tab:not([selected]),
+        > tab-group:not(:has(tab[selected])) {
+          max-height: 40px !important;
+          opacity: 100% !important;
+          transition: none !important;
+        }
+      }
+    }
+  }
+  tab-group[collapsed] tab[aria-hidden="true"] {
+    transition: none !important;
+  }
+}
+
+/* Native drag ghost: Zen clones the whole tab-group for group drags.
+   Collapse the child container inside the ghost so it stays a single
+   header row like native tab/folder ghosts (no JS clone surgery). */
+tab-group[drag-image] > .tab-group-container,
+tab-group[drag-image] .tab-group-overflow-count-container {
+  display: none !important;
+}

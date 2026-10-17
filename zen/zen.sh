@@ -2,7 +2,7 @@
 #################
 # JuicyGoose007 #
 #################
-# Save or restore Zen Browser settings: prefs, CSS, mods, script mods,
+# Save or restore Zen Browser settings: prefs, CSS, Sine and its mods,
 # shortcuts, containers.
 # Not a stow package -- Zen names its profile folder at random, so this finds
 # it through profiles.ini and copies files in or out. Copies, not symlinks:
@@ -19,13 +19,13 @@ root="$HOME/.config/zen"
 app=/opt/zen-browser-bin
 
 # Top-level files copied as-is. Folders are replaced whole.
-dirs=(chrome/zen-themes chrome/utils chrome/JS)
+# Sine manages mods in chrome/sine-mods/ (it moves Zen's own mods there and
+# deletes zen-themes.*), runs from chrome/JS/, and boots via chrome/utils/.
+dirs=(chrome/sine-mods chrome/utils chrome/JS)
 files=(
   user.js
   chrome/userChrome.css
   chrome/userContent.css
-  chrome/zen-themes.css
-  zen-themes.json
   zen-keyboard-shortcuts.json
   containers.json
 )
@@ -53,11 +53,13 @@ save)
 
   # Mod settings live in prefs.js among ~300 other lines of browser state.
   # Keep only the prefs the installed mods declare in their preferences.json,
-  # plus Tab Groups' sections (zen.sitegroups.*), which it doesn't declare.
-  cat "$profile"/chrome/zen-themes/*/preferences.json 2>/dev/null |
-    jq -r '.[].property' | sort -u |
+  # plus Tab Groups' sections (zen.sitegroups.*), which it doesn't declare,
+  # and Sine's own settings.
+  cat "$profile"/chrome/sine-mods/*/preferences.json 2>/dev/null |
+    jq -r '.[].property? // empty' | sort -u |
     awk 'NR==FNR{want[$0];next}
-         match($0,/^user_pref\("[^"]+"/){n=substr($0,12,RLENGTH-12); if(n in want || n ~ /^zen\.sitegroups\./) print}' \
+         match($0,/^user_pref\("[^"]+"/){n=substr($0,12,RLENGTH-12)
+           if(n in want || n ~ /^zen\.sitegroups\./ || (n ~ /^sine\./ && n !~ /^sine\.(fork-id|engine\.pending-restart)$/)) print}' \
       - "$profile/prefs.js" >"$src/mod-prefs.js"
   echo ":: Saved Zen settings from $profile"
   ;;
@@ -70,17 +72,13 @@ restore)
     mkdir -p "$profile/$(dirname "$f")"
     cp "$src/$f" "$profile/$f"
   done
-  # The Noctalia imports hold an absolute path saved on another machine.
-  # Point them at this user's home instead.
-  sed -i -E "s|@import \"[^\"]*/\.cache/noctalia/|@import \"$HOME/.cache/noctalia/|" \
-    "$profile/chrome/userChrome.css" "$profile/chrome/userContent.css"
   for d in "${dirs[@]}"; do
     rm -rf "${profile:?}/$d"
     cp -r "$src/$d" "$profile/$d"
   done
 
-  # fx-autoconfig runs chrome/JS/*.uc.js scripts, but only once its two
-  # starter files sit in Zen's install folder. Root owns that folder.
+  # Sine only starts once its bootloader's two files sit in Zen's install
+  # folder. Root owns that folder.
   for f in config.js defaults/pref/config-prefs.js; do
     cmp -s "$src/../program/$f" "$app/$f" ||
       sudo install -Dm644 "$src/../program/$f" "$app/$f"
