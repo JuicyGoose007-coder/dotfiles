@@ -2,7 +2,7 @@
 // https://github.com/YaLTeR/niri/wiki/Configuration:-Window-Rules
 
     window-rule {
-        geometry-corner-radius 12 // Set every window radius to 12
+        geometry-corner-radius 20 // Set every window radius to 20
         clip-to-geometry true
     }
 
@@ -56,7 +56,6 @@
         match app-id="zen" title=r#" - YouTube — Zen Browser$"#
         opacity 1.0
     }
-
     window-rule {
         background-effect {
             blur true
@@ -151,7 +150,7 @@
     window-rule{
         match app-id="org.kde.kdevelop"
         open-focused true
-        open-maximized true
+        // open-maximized true
         opacity 0.9
     }
 
