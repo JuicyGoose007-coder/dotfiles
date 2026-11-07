@@ -189,6 +189,7 @@ alias reload='exec zsh'
 
 # Programs
 alias nv='nvim'
+alias lv='NVIM_APPNAME=lazyvim nvim'
 alias rb='reboot'
 alias wm='wiremix'
 
