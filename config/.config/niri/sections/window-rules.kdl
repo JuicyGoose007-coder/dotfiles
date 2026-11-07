@@ -33,7 +33,6 @@
         match app-id=r#"^gnome-calculator$"#
         match app-id=r#"^galculator$"#
         match app-id=r#"^blueman-manager$"#
-        match app-id=r#"^org\.gnome\.Nautilus$"#
         match app-id=r#"^xdg-desktop-portal$"#
         open-floating true
     }
@@ -45,6 +44,12 @@
         match app-id="kitty"
         match app-id="zen"
         draw-border-with-background false
+    }
+
+    window-rule {
+        match app-id=r#"^(loaf|app\.loaf|io\.github\.m_uvex\.Loaf)$"#
+        open-floating true
+        default-window-height { proportion 0.6; }
     }
 
     window-rule {

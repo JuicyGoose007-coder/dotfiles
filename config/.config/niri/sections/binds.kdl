@@ -9,11 +9,11 @@ binds {
     MOD+B                               hotkey-overlay-title="Open Browser: firefox" { spawn-sh "firefox"; }
     MOD+Z                               hotkey-overlay-title="Open Browser: zen-browser" { spawn-sh "zen-browser"; }
     MOD+T                               hotkey-overlay-title="Toggle Opacity" { toggle-window-rule-opacity; }
-    MOD+S                               hotkey-overlay-title="Open Superfile" { spawn "kitty" "-e" "spf"; }
+    MOD+S                               hotkey-overlay-title="Open rovefm" { spawn "kitty" "-e" "rovefm"; }
 
     
     // Please choose your own file manager
-    MOD+E                             hotkey-overlay-title="File Manager: Nautilus" { spawn-sh "nautilus"; }
+    MOD+E                             hotkey-overlay-title="File Manager: Loaf" { spawn-sh "loaf"; }
 
     // ─── Noctalia Shell ───
     MOD+A                               hotkey-overlay-title="Control Center" { spawn-sh "noctalia msg panel-toggle control-center"; }
