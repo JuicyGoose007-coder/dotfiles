@@ -139,7 +139,7 @@ binds {
         MOD+SHIFT+G { move-column-to-workspace "Gaming"; }
         MOD+SHIFT+M { move-column-to-workspace "Main"; }
         MOD+SHIFT+I { move-column-to-workspace "Discord"; }
-        MOD+SHIFT+N { move-column-to-workspace-down; }
+        MOD+SHIFT+N { move-column-to-workspace 3; }
         MOD+SHIFT+4 { move-column-to-workspace 4; }
         MOD+SHIFT+5 { move-column-to-workspace 5; }
         MOD+SHIFT+6 { move-column-to-workspace 6; }
