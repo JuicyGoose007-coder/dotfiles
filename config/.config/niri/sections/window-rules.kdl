@@ -4,6 +4,7 @@
     window-rule {
         geometry-corner-radius 20 // Set every window radius to 20
         clip-to-geometry true
+        draw-border-with-background false
     }
 
     window-rule {
@@ -35,15 +36,6 @@
         match app-id=r#"^blueman-manager$"#
         match app-id=r#"^xdg-desktop-portal$"#
         open-floating true
-    }
-
-    window-rule {
-        match app-id=r#"^org\.wezfurlong\.wezterm$"#
-        match app-id="ghostty"
-        match app-id="com.mitchellh.ghostty"
-        match app-id="kitty"
-        match app-id="zen"
-        draw-border-with-background false
     }
 
     window-rule {
@@ -133,7 +125,6 @@
         default-column-width { proportion 0.6; }
         default-window-height { proportion 0.7; }
         opacity 0.9
-        draw-border-with-background false
     }
 
     window-rule{
