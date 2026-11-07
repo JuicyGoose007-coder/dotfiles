@@ -175,6 +175,7 @@ binds {
     // Use this when a fullscreen app blocks your keybinds.
     // It disables any active keyboard shortcut inhibitor, restoring control.
     MOD+ESCAPE                          allow-inhibiting=false { toggle-keyboard-shortcuts-inhibit; }
+    MOD+CTRL+SHIFT+Q                    repeat=false allow-inhibiting=false hotkey-overlay-title="Kill gamescope" { spawn "pkill" "-KILL" "-x" "gamescope"; }
 
     // ─── Exit / Power ───
     CTRL+ALT+DELETE                     { quit; } // Also quits Niri
