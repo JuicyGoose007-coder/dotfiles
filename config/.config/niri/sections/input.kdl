@@ -19,7 +19,7 @@ input {
 
     focus-follows-mouse // Automatically focus windows under the mouse pointer
     warp-mouse-to-focus // Moves mouse to window that is focused
-    workspace-auto-back-and-forth // Enable workspace back & forth switching
+    // workspace-auto-back-and-forth // Enable workspace back & forth switching
 }
 
 gestures {
